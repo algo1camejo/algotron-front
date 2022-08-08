@@ -1,13 +1,11 @@
 .algo {
   color: var(--bs-light);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 5px;
   font-weight: bold;
 }
 
 .tron {
   color: var(--bs-light);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: var(--bs-primary);
   padding: 5px;
   font-weight: bold;
