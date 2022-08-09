@@ -1,17 +1,17 @@
 import './custom.scss';
-import './App.css';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from 'src/pages/app/Home';
+import NotFound from 'src/pages/error/NotFound';
 
 function App() {
   return (
-      <Navbar bg="dark">
-        <Container>
-          <Navbar.Brand href="#home">
-            <span className='algo'>Algo</span><span className='tron'>Tron</span>
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path="*" element={<NotFound/>}/>
+    </Routes>
   );
 }
 

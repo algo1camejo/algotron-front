@@ -3,11 +3,13 @@ $body-bg: #DADADA;
 
 $theme-colors: (
   "primary": #EE4266,
-  "info": #15B097,
-  "dark": #555B6E,
+  "success": #15B097,
+  "info": #89AAE6,
   "light": #f6fff8,
+  "dark": #555B6E,
 );
 
 $font-family-sans-serif: 'Catamaran', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap';
