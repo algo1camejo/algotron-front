@@ -1,13 +1,26 @@
 // Override default variables before the import
-$body-bg: #DADADA;
+$primary: #EE4266;
+$success: #15B097;
+$info: #89AAE6;
+$light: #f6fff8;
+$dark: #555B6E;
 
-$theme-colors: (
-  "primary": #EE4266,
-  "success": #15B097,
-  "info": #89AAE6,
-  "light": #f6fff8,
-  "dark": #555B6E,
-);
+$color-contrast-dark: $light;
+$color-contrast-light: $dark;
+
+$body-bg: #DADADA;
+$body-color: $dark;
+
+$dropdown-bg: $light;
+$dropdown-border-width: 0px;
+$dropdown-padding-x: .75rem;
+$dropdown-font-size: .875rem;
+$dropdown-link-color: $dark;
+
+$border-radius: .625rem;
+
+$enable-shadows: true;
+$box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.1);
 
 $font-family-sans-serif: 'Catamaran', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
