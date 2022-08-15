@@ -14,7 +14,11 @@ export const Base: FC = () => {
           <UserDropdown/>
         </Container>
       </Navbar>
-      <Container>
+      <Container
+        id="content-container"
+        fluid="md"
+        className="my-4"
+      >
         <Outlet/>
       </Container>
     </>

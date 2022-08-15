@@ -11,18 +11,45 @@ $color-contrast-light: $dark;
 $body-bg: #DADADA;
 $body-color: $dark;
 
+$border-radius: .625rem;
+
+$enable-shadows: true;
+$box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.1);
+
 $dropdown-bg: $light;
 $dropdown-border-width: 0px;
 $dropdown-padding-x: .75rem;
 $dropdown-font-size: .875rem;
 $dropdown-link-color: $dark;
 
-$border-radius: .625rem;
+$card-box-shadow: $box-shadow;
+$card-border-width: 0px;
+$card-bg: $light;
 
-$enable-shadows: true;
-$box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.1);
+$btn-hover-bg-shade-amount: 7%;
+$btn-hover-bg-tint-amount: 7%;
+$btn-active-bg-shade-amount: 7%;
+$btn-active-bg-tint-amount: 7%;
 
 $font-family-sans-serif: 'Catamaran', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  height: 100vh;
+  width: 100%;
+}
+
+#root {
+ height: 100%;
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+}
+
+.card-title {
+  color: $primary;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+}
