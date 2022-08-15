@@ -13,7 +13,9 @@ export const TrabajosPracticosCard: FC = () => {
     >
         <Card.Body>
           <Card.Title>Trabajos Prácticos</Card.Title>
-          <FontAwesomeIcon icon={faLaptopCode}/>
+          <Card.Text>
+            <FontAwesomeIcon icon={faLaptopCode}/>
+          </Card.Text>
         </Card.Body>
     </Card>
   );

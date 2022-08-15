@@ -53,3 +53,19 @@ body {
   font-weight: $font-weight-semibold;
   text-align: center;
 }
+
+.card-header {
+  color: $primary;
+  font-weight: $font-weight-semibold;
+  font-size: $h4-font-size;
+  border-bottom-width: $border-width;
+  text-align: center;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  color: $light;
+}
