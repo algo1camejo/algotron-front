@@ -13,9 +13,7 @@ export const ExamenesCard: FC = () => {
     >
       <Card.Body>
         <Card.Title>Exámenes</Card.Title>
-        <Card.Text>
-          <FontAwesomeIcon icon={faBookOpen}/>
-        </Card.Text>
+        <FontAwesomeIcon icon={faBookOpen}/>
       </Card.Body>
     </Card>
   );
