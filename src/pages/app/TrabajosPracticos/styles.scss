@@ -1,0 +1,12 @@
+.status-alert {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  img {
+    max-height: 70px;
+  };
+  .vr {
+    margin: 0 1.5rem;
+  };
+};

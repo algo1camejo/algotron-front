@@ -18,7 +18,8 @@ const entregas: Entrega[] = [
     instance: { id: 2, title: 'TP2 - Entrega' },
     date: (new Date()).toISOString(),
   },
-  { id: 3,
+  {
+    id: 3,
     status: 'PENDING',
     instance: { id: 3, title: 'TP2 - Entrega' },
     date: (new Date()).toISOString(),
@@ -26,7 +27,6 @@ const entregas: Entrega[] = [
 ];
 
 export const EntregasTable: FC = () => {
-
   const renderEntrega = (entrega: Entrega) => {
     const {
       id,
@@ -47,7 +47,7 @@ export const EntregasTable: FC = () => {
           {formatDateWithHour(date)}
         </td>
         <td>
-          <EntregaActions/>
+          <EntregaActions id={id}/>
         </td>
       </tr>
     );

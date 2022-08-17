@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Stack from 'react-bootstrap/Stack';
-import NuevaEntrega from './NuevaEntrega';
-import Entregas from './Entregas';
+import NuevaEntrega from './components/NuevaEntrega';
+import Entregas from './components/Entregas';
 
 export const TrabajosPracticos: FC = () => {
   return (

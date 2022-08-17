@@ -33,7 +33,7 @@ export const NotFound: FC = () => {
       </div>
       <Row className="image">
         <Col>
-          <Image src="static/error/tron-buscando-comida.svg"/>
+          <Image src="/static/error/tron-buscando-comida.svg"/>
         </Col>
       </Row>
         <Row className="action">

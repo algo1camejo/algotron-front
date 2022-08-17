@@ -1,13 +1,11 @@
-export const ENTREGA_STATUS = {
-  SUCCESS: 'SUCCESS',
-  ERROR: 'ERROR',
-  PENDING: 'PENDING',
-};
+import {
+  STATUS,
+  Status,
+} from 'src/types/status';
 
-export type EntregaStatus =
-  'ERROR' |
-  'SUCCESS' |
-  'PENDING';
+export const ENTREGA_STATUS = STATUS;
+
+export type EntregaStatus = Status;
 
 export type Instance = {
   id: number;
@@ -19,4 +17,8 @@ export type Entrega = {
   status: EntregaStatus;
   instance: Instance;
   date: string;
+};
+
+export type Resultados = {
+  output: string;
 };

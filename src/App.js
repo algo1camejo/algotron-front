@@ -1,8 +1,5 @@
 import './custom.scss';
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 import Base from 'src/pages/app/Base';
 import Home from 'src/pages/app/Home';
 import TrabajosPracticos from 'src/pages/app/TrabajosPracticos';
@@ -14,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Base/>}>
         <Route path="/" element={<Home/>}/>
-        <Route path="trabajos-practicos" element={<TrabajosPracticos/>}/>
+        <Route path="trabajos-practicos/*" element={<TrabajosPracticos/>}/>
         <Route path="examenes" element={<Examenes/>}/>
       </Route>
       <Route path="*" element={<NotFound/>}/>

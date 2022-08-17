@@ -20,7 +20,7 @@ export const Logo: FC<LogoProps> = (props) => {
       to="/"
       onClick={onClick}
     >
-      <Image src="static/logos/logo-dark.svg"/>
+      <Image src="/static/logos/logo-dark.svg"/>
     </Navbar.Brand>
   );
 }
