@@ -3,12 +3,14 @@ import { Routes, Route } from 'react-router-dom';
 import Base from 'src/pages/app/Base';
 import Home from 'src/pages/app/Home';
 import TrabajosPracticos from 'src/pages/app/TrabajosPracticos';
+import Login from 'src/pages/auth/Login';
 import Examenes from 'src/pages/app/Examenes';
 import NotFound from 'src/pages/error/NotFound';
 
 function App() {
   return (
     <Routes>
+      <Route path="login/*" element={<Login/>}/>
       <Route path="/" element={<Base/>}>
         <Route path="/" element={<Home/>}/>
         <Route path="trabajos-practicos/*" element={<TrabajosPracticos/>}/>
