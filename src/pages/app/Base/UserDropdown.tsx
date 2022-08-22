@@ -1,8 +1,11 @@
 import { FC } from 'react';
+import { useAuth } from 'src/hooks';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 
 export const UserDropdown: FC = () => {
+  const { logout } = useAuth();
+
   return (
     <NavDropdown
       id="user-dropdown"
@@ -15,7 +18,11 @@ export const UserDropdown: FC = () => {
       </NavDropdown.ItemText>
       <NavDropdown.Divider />
       <NavDropdown.ItemText className="d-grid">
-        <Button variant="outline-danger" size="sm">
+        <Button
+          variant="outline-danger"
+          size="sm"
+          onClick={logout}
+        >
           Salir
         </Button>
       </NavDropdown.ItemText>

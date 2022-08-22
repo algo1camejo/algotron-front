@@ -6,13 +6,29 @@ import TrabajosPracticos from 'src/pages/app/TrabajosPracticos';
 import Login from 'src/pages/auth/Login';
 import Examenes from 'src/pages/app/Examenes';
 import NotFound from 'src/pages/error/NotFound';
+import { AuthGuard, GuestGuard } from 'src/components/guards';
 
 function App() {
   return (
     <Routes>
-      <Route path="login/*" element={<Login/>}/>
-      <Route path="/" element={<Base/>}>
+      <Route
+        path="login/*"
+        element={
+          <GuestGuard>
+            <Login/>
+          </GuestGuard>
+        }
+      />
+      <Route
+        path="/"
+        element={
+          <AuthGuard>
+            <Base/>
+          </AuthGuard>
+        }
+      >
         <Route path="/" element={<Home/>}/>
+        <Route path="home" element={<Home/>}/>
         <Route path="trabajos-practicos/*" element={<TrabajosPracticos/>}/>
         <Route path="examenes" element={<Examenes/>}/>
       </Route>
