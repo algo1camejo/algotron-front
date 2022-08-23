@@ -75,3 +75,11 @@ body {
 .btn-primary:focus {
   color: $light;
 }
+
+.btn-primary:disabled,
+.btn-primary.disabled,
+fieldset:disabled
+.btn-primary
+{
+  color: $light;
+}

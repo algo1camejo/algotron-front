@@ -38,9 +38,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const [state, setState] = useState<AuthState>(initialState);
 
   const login = async (loginData: LoginData) => {
-    const response = {
-      data: { access: 'token', refresh: 'refresh' },
-    } as AxiosResponse<LoginResponse> ;
+    const response = await authService.login(loginData);
 
     const { access, refresh } = response.data;
 

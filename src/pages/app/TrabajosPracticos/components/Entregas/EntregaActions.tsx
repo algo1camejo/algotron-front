@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Stack from 'react-bootstrap/Stack';
-import IconButton from 'src/components/IconButton';
+import IconButton from 'src/components/buttons/IconButton';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 

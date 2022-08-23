@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import LoadingButton from 'src/components/buttons/LoadingButton';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
@@ -14,7 +14,7 @@ import './styles.scss';
 
 export const Login: FC = () => {
   const [validated, setValidated] = useState<boolean>(false);
-  const [form, setForm] = useState<LoginData>({
+  const [formData, setFormData] = useState<LoginData>({
     email: '',
     password: '',
   });
@@ -24,7 +24,7 @@ export const Login: FC = () => {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    setForm({ ...form, [name]: value })
+    setFormData({ ...formData, [name]: value })
   };
 
   const handleSubmit = (event: any) => {
@@ -38,7 +38,7 @@ export const Login: FC = () => {
       return;
     }
 
-    loginMutation.mutate(form);
+    loginMutation.mutate(formData);
   };
 
   return (
@@ -94,13 +94,19 @@ export const Login: FC = () => {
                       La contraseña es obligatoria
                     </Form.Control.Feedback>
                   </Form.Group>
+                  {loginMutation.isError && (
+                    <Form.Text className="text-danger text-center">
+                      Credenciales inválidas
+                    </Form.Text>
+                  )}
                 </Stack>
-                <Button
+                <LoadingButton
                   type="submit"
                   disabled={loginMutation.isLoading}
+                  isLoading={loginMutation.isLoading}
                 >
                   Ingresar
-                </Button>
+                </LoadingButton>
               </Form>
             </Card.Body>
           </Card>

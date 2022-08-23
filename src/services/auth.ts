@@ -5,4 +5,4 @@ import {
 } from 'src/types/auth';
 
 export const login = (loginData: LoginData) =>
-  api.post<LoginResponse>('api/token', loginData);
+  api.post<LoginResponse>('api/token/', loginData);
