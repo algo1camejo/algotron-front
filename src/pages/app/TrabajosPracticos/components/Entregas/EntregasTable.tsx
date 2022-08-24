@@ -56,18 +56,20 @@ export const EntregasTable: FC = () => {
   return (
     <Table striped className="text-center">
       <thead>
-        <th>
-          Estado
-        </th>
-        <th>
-          Instancia
-        </th>
-        <th>
-          Fecha
-        </th>
-        <th className="visually-hidden">
-          Acciones
-        </th>
+        <tr>
+          <th>
+            Estado
+          </th>
+          <th>
+            Instancia
+          </th>
+          <th>
+            Fecha
+          </th>
+          <th className="visually-hidden">
+            Acciones
+          </th>
+        </tr>
       </thead>
       <tbody>
         {entregas.map(renderEntrega)}
