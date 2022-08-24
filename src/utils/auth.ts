@@ -1,4 +1,12 @@
 import api from 'src/config/api';
+import { User } from 'src/types/auth';
+
+export const getFullName = (user: User | null): string => (
+  [
+    user?.firstName,
+    user?.lastName,
+  ].filter(str => !!str).join(' ')
+);
 
 export const setSession = (
   access: string,

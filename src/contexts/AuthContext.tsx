@@ -40,13 +40,23 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const login = async (loginData: LoginData) => {
     const response = await authService.login(loginData);
 
-    const { access, refresh } = response.data;
+    const {
+      access,
+      refresh,
+      first_name,
+      last_name,
+      padron,
+    } = response.data;
 
     setSession(access, refresh);
 
     setState({
       isAuthenticated: true,
-      user: null,
+      user: {
+        padron,
+        firstName: first_name,
+        lastName: last_name,
+      },
     });
 
     return response;

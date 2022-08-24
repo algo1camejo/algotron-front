@@ -2,19 +2,20 @@ import { FC } from 'react';
 import { useAuth } from 'src/hooks';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
+import { getFullName } from 'src/utils/auth';
 
 export const UserDropdown: FC = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   return (
     <NavDropdown
       id="user-dropdown"
-      title="Nombre Usuario"
+      title={getFullName(user)}
       className="text-light"
       align="end"
     >
       <NavDropdown.ItemText className="text-center">
-        Padrón: 111111
+        Padrón: {user?.padron}
       </NavDropdown.ItemText>
       <NavDropdown.Divider />
       <NavDropdown.ItemText className="d-grid">

@@ -1,4 +1,7 @@
 export type User = {
+  firstName: string;
+  lastName: string;
+  padron: number;
 };
 
 export type AuthState = {
@@ -16,4 +19,7 @@ export type LoginData = {
 export type LoginResponse = {
   access: string;
   refresh: string;
+  first_name: string;
+  last_name: string;
+  padron: number;
 };
