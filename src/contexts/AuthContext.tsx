@@ -1,7 +1,12 @@
-import { FC, ReactNode, createContext, useState } from 'react';
+import { FC, ReactNode, createContext, useState, useEffect } from 'react';
 import { AxiosResponse } from 'axios';
 import * as authService from 'src/services/auth';
-import { setSession, clearSession } from 'src/utils/auth';
+import {
+  getUser,
+  initializeSession,
+  setSession,
+  clearSession,
+} from 'src/utils/auth';
 import {
   LoginData,
   LoginResponse,
@@ -37,6 +42,16 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
 
   const [state, setState] = useState<AuthState>(initialState);
 
+  useEffect(() => {
+    initializeSession();
+    const user = getUser();
+
+    setState({
+      isAuthenticated: true,
+      user,
+    });
+  }, []);
+
   const login = async (loginData: LoginData) => {
     const response = await authService.login(loginData);
 
@@ -48,15 +63,17 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
       padron,
     } = response.data;
 
-    setSession(access, refresh);
+    const user = {
+      padron,
+      firstName: first_name,
+      lastName: last_name,
+    };
+
+    setSession(access, refresh, user);
 
     setState({
       isAuthenticated: true,
-      user: {
-        padron,
-        firstName: first_name,
-        lastName: last_name,
-      },
+      user,
     });
 
     return response;
