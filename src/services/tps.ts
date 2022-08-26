@@ -8,3 +8,8 @@ export const getInstances = () =>
 
 export const getActiveInstances = () =>
   api.get<InstancesResponse>('/tps/api/v1/tps/?vigente=true');
+
+export const createTP = (data: any) =>
+  api.post('/tps/api/v1/entregas/', data, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
