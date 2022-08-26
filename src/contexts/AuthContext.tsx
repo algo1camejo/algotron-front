@@ -47,7 +47,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     const user = getUser();
 
     setState({
-      isAuthenticated: true,
+      isAuthenticated: !!user,
       user,
     });
   }, []);
