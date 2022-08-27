@@ -1,5 +1,6 @@
 import mem from "mem";
 import api from 'src/config/api';
+import { refreshToken as refreshTokenRequest } from 'src/services/auth';
 import { User } from 'src/types/auth';
 
 export const getFullName = (user: User | null): string => (
@@ -88,7 +89,7 @@ const refreshToken = mem(async () =>
 
     if (!refresh) return;
 
-    const { data } = await api.post('/api/token/refresh/', { refresh })
+    const { data } = await refreshTokenRequest({ refresh });
 
     if (data.access) {
       localStorage.setItem('access', data.access);

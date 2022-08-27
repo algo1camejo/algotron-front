@@ -15,6 +15,10 @@ export type LoginData = {
   password: string;
 };
 
+export type RefreshTokenData = {
+  refresh: string;
+};
+
 // Response
 export type LoginResponse = {
   access: string;
@@ -22,4 +26,8 @@ export type LoginResponse = {
   first_name: string;
   last_name: string;
   padron: number;
+};
+
+export type RefreshTokenResponse = {
+  access: string;
 };
