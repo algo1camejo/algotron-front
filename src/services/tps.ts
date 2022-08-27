@@ -16,8 +16,10 @@ export const createTP = (data: any) =>
     headers: { "Content-Type": "multipart/form-data" }
   });
 
-export const getEntregas = () =>
-  api.get<EntregasResponse>('/tps/api/v1/entregas/');
+export const getEntregas = (page: number = 1, limit: number = 10) =>
+  api.get<EntregasResponse>('/tps/api/v1/entregas/', {
+    params: { offset: (page - 1) * limit, limit },
+  });
 
 export const getEntregaDetail = (id: number) =>
   api.get<EntregaDetailResponse>(`/tps/api/v1/entregas/${id}/`);

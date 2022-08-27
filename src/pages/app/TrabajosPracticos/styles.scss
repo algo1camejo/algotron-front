@@ -17,24 +17,31 @@
   margin: 1rem 0 2rem 0;
 };
 
-.sin-entregas {
-  img {
-    opacity: 0.8;
-    width: 210px;
-    margin-right: 0rem;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+.entregas-container {
+  .table-container {
+    width: 100%;
   };
-  p {
-    margin-top: 1rem;
-    margin-bottom: 0;
-    font-size: 1.25rem;
-    font-weight: lighter;
+  .card-body {
+    min-height: 603px;
+    justify-content: space-between;
   };
-  td {
+  .sin-entregas {
+    margin-top: 9rem;
     padding: 1rem;
-  }
-  div {
-    margin-right: -2rem;
+    padding-top: 0;
+    text-align: center;
+    img {
+      opacity: 0.8;
+      width: 210px;
+      margin-right: 0rem;
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    };
+    p {
+      margin-top: 1rem;
+      margin-bottom: 0;
+      font-size: 1.25rem;
+      font-weight: lighter;
+    };
   };
 };

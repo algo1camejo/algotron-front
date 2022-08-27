@@ -4,7 +4,7 @@ import EntregasTable from './EntregasTable';
 
 export const EntregasCard: FC = () => {
   return (
-    <Card>
+    <Card className="entregas-container">
       <Card.Header>
         Mis entregas
       </Card.Header>

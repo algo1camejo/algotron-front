@@ -7,7 +7,8 @@ export const tpsKeys = {
   },
   entregas: {
     all: () => [...tpsKeys.all(), 'entregas'],
-    list: () => [...tpsKeys.entregas.all(), 'list'],
+    allList: () => [...tpsKeys.entregas.all(), 'list'],
+    list: (page: number) => [...tpsKeys.entregas.allList(), 'page', page],
     allDetail: () => [...tpsKeys.entregas.all(), 'detail'],
     detail: (id: number) => [...tpsKeys.entregas.allDetail(), id],
   },

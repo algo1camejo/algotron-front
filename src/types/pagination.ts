@@ -7,7 +7,7 @@ export type PaginationLegacy<T> = {
 
 export type Pagination<T> = {
   page: number,
-  totalPages: number,
+  total_pages: number,
   limit: number,
   count: number,
   links: {
