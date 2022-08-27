@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Badge from 'react-bootstrap/Badge';
-import { EntregaStatus } from 'src/types/entregas';
+import { EntregaStatus } from 'src/types/tps';
 import { PROPS_BY_STATUS } from 'src/utils/status';
 
 export type EntregaStatusPillProps = {

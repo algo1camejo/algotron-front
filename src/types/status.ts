@@ -1,10 +1,10 @@
 export const STATUS = {
-  SUCCESS: 'SUCCESS',
-  ERROR: 'ERROR',
-  PENDING: 'PENDING',
+  SUCCESS: 'Éxito',
+  ERROR: 'Falló',
+  PENDING: 'Pendiente',
 };
 
 export type Status =
-  'ERROR' |
-  'SUCCESS' |
-  'PENDING';
+  'Falló' |
+  'Éxito' |
+  'Pendiente';

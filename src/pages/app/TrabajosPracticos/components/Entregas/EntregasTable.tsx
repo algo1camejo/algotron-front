@@ -1,50 +1,43 @@
 import { FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Table from 'react-bootstrap/Table';
+import Image from 'react-bootstrap/Image';
 import EntregaStatusPill from './EntregaStatusPill';
 import EntregaActions from './EntregaActions';
-import { Entrega } from 'src/types/entregas';
+import { PartialEntrega } from 'src/types/tps';
+import { getEntregas } from 'src/services/tps';
 import { formatDateWithHour } from 'src/utils/dates';
-
-const entregas: Entrega[] = [
-  {
-    id: 1,
-    status: 'ERROR',
-    instance: { id: 1, title: 'TP2 - Entrega' },
-    date: (new Date()).toISOString(),
-  },
-  {
-    id: 2,
-    status: 'SUCCESS',
-    instance: { id: 2, title: 'TP2 - Entrega' },
-    date: (new Date()).toISOString(),
-  },
-  {
-    id: 3,
-    status: 'PENDING',
-    instance: { id: 3, title: 'TP2 - Entrega' },
-    date: (new Date()).toISOString(),
-  },
-];
+import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
 
 export const EntregasTable: FC = () => {
-  const renderEntrega = (entrega: Entrega) => {
+  const {
+    data,
+    isLoading,
+  } = useQuery(
+    tpsKeys.entregas.list(),
+    getEntregas,
+  );
+
+  const entregas = data?.data?.results || [];
+
+  const renderEntrega = (entrega: PartialEntrega) => {
     const {
       id,
-      status,
-      instance,
-      date,
+      get_estado_display,
+      tp,
+      horario,
     } = entrega;
 
     return (
       <tr key={id}>
         <td>
-          <EntregaStatusPill status={status}/>
+          <EntregaStatusPill status={get_estado_display}/>
         </td>
         <td>
-          {instance?.title}
+          {tp?.nombre}
         </td>
         <td>
-          {formatDateWithHour(date)}
+          {formatDateWithHour(horario)}
         </td>
         <td>
           <EntregaActions id={id}/>
@@ -72,6 +65,18 @@ export const EntregasTable: FC = () => {
         </tr>
       </thead>
       <tbody>
+        {entregas.length === 0 && (
+          <tr className="sin-entregas">
+            <td colSpan={3}>
+              <div className="text-muted">
+                <Image src="/static/error/wool-ball-with-paws.svg"/>
+                <p>
+                  No hay entregas
+                </p>
+              </div>
+            </td>
+          </tr>
+        )}
         {entregas.map(renderEntrega)}
       </tbody>
     </Table>

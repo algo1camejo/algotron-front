@@ -5,4 +5,10 @@ export const tpsKeys = {
     list: () => [...tpsKeys.instances.all(), 'list'],
     active: () => [...tpsKeys.instances.list(), 'active'],
   },
+  entregas: {
+    all: () => [...tpsKeys.all(), 'entregas'],
+    list: () => [...tpsKeys.entregas.all(), 'list'],
+    allDetail: () => [...tpsKeys.entregas.all(), 'detail'],
+    detail: (id: number) => [...tpsKeys.entregas.allDetail(), id],
+  },
 };

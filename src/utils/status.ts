@@ -2,7 +2,7 @@ import { STATUS } from 'src/types/status';
 
 export const PROPS_BY_STATUS = {
   [STATUS.ERROR]: {
-    title: 'Error',
+    title: 'Falló',
     subtitle: 'Entrega no aceptada',
     color: 'danger',
     image: '/static/tron/llorando.svg',

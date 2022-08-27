@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Image from 'react-bootstrap/Image';
-import { EntregaStatus } from 'src/types/entregas';
+import { EntregaStatus } from 'src/types/tps';
 import { PROPS_BY_STATUS } from 'src/utils/status';
 
 export type EntregaStatusAlertProps = {
