@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import EntregaStatusAlert from './components/EntregaStatusAlert';
+import IconButton from 'src/components/buttons/IconButton';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { getEntregaDetail } from 'src/services/tps';
 import { formatDateWithHour } from 'src/utils/dates';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
@@ -12,7 +14,6 @@ export const Entrega: FC = () => {
 
   const {
     data,
-    isLoading,
   } = useQuery(
     tpsKeys.entregas.detail(Number(id)),
     () => getEntregaDetail(Number(id)),
@@ -34,9 +35,17 @@ export const Entrega: FC = () => {
   } = entrega;
 
   return (
-    <Card>
+    <Card className="entrega-container">
       <EntregaStatusAlert status={get_estado_display}/>
       <Card.Body>
+        <IconButton
+          as="a"
+          href={archivo}
+          download
+          className="download-icon-button"
+          label="Descargar entrega"
+          icon={faDownload}
+        />
         <div className="tp-header">
           <Card.Title>
             {tp?.nombre}
@@ -51,6 +60,12 @@ export const Entrega: FC = () => {
         <Card.Text>
           {resultado}
         </Card.Text>
+        <Card.Link
+          href={archivo}
+          download
+        >
+          Descargar entrega
+        </Card.Link>
       </Card.Body>
     </Card>
   );

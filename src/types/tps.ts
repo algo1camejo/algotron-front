@@ -27,7 +27,6 @@ export type Instance = {
 export type Entrega =
   PartialEntrega &
   {
-    archivo: string;
     resultado: string;
   };
 
@@ -36,6 +35,7 @@ export type PartialEntrega = {
   get_estado_display: EntregaStatus,
   tp: EntregaInstance,
   horario: string,
+  archivo: string;
 };
 
 // Response

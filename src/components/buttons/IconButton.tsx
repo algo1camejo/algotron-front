@@ -1,28 +1,39 @@
-import { FC } from 'react';
 import Button from 'react-bootstrap/Button';
+import { ButtonProps } from 'react-bootstrap';
+import { BsPrefixProps, ReplaceProps } from "react-bootstrap/helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export type IconButtonProps = {
+type NewButtonProps = {
   label: string;
   icon: any;
-  onClick?: () => void;
-};
+} & ButtonProps
 
-export const IconButton: FC<IconButtonProps> = (props) => {
+export type IconButtonProps<
+  As extends React.ElementType = 'button'
+> = ReplaceProps<As, BsPrefixProps<As> & NewButtonProps>
+
+export const IconButton= <As extends React.ElementType = 'button'>(
+  props: IconButtonProps<As>
+) => {
   const {
     label,
     icon,
-    onClick = () => null,
+    ...buttonProps
   } = props;
 
   return (
     <Button
-      className="rounded-circle border-0 shadow-none"
+      {...buttonProps}
+      className={`
+        rounded-circle
+        border-0
+        shadow-none
+        ${buttonProps?.className}
+      `}
       variant="outline-dark"
       size="sm"
       aria-label={label}
       title={label}
-      onClick={onClick}
     >
       <FontAwesomeIcon icon={icon}/>
     </Button>

@@ -1,20 +1,25 @@
-.status-alert {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  img {
-    max-height: 70px;
+.entrega-container {
+  .status-alert {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    img {
+      max-height: 70px;
+    };
+    .vr {
+      margin: 0 1.5rem;
+    };
   };
-  .vr {
-    margin: 0 1.5rem;
+  .tp-header {
+    text-align: center;
+    margin: 1rem 0 2rem 0;
   };
-};
-
-.tp-header {
-  margin: 1rem 0 2rem 0;
+  .download-icon-button {
+    margin-left: auto;
+  };
 };
 
 .entregas-container {

@@ -15,7 +15,6 @@ export const EntregasTable: FC = () => {
 
   const {
     data,
-    isLoading,
   } = useQuery(
     tpsKeys.entregas.list(currentPage),
     () => getEntregas(currentPage),);
@@ -49,6 +48,7 @@ export const EntregasTable: FC = () => {
       get_estado_display,
       tp,
       horario,
+      archivo,
     } = entrega;
 
     return (
@@ -63,7 +63,10 @@ export const EntregasTable: FC = () => {
           {formatDateWithHour(horario)}
         </td>
         <td>
-          <EntregaActions id={id}/>
+          <EntregaActions
+            id={id}
+            archivo={archivo}
+          />
         </td>
       </tr>
     );

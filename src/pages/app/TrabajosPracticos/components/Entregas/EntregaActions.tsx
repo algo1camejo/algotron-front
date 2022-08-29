@@ -7,10 +7,14 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 export type EntregaActionsProps = {
   id: number;
+  archivo: string;
 };
 
 export const EntregaActions: FC<EntregaActionsProps> = (props) => {
-  const { id } = props;
+  const {
+    id,
+    archivo,
+  } = props;
 
   const navigate = useNavigate();
 
@@ -30,6 +34,9 @@ export const EntregaActions: FC<EntregaActionsProps> = (props) => {
         onClick={handleSee}
       />
       <IconButton
+        as="a"
+        href={archivo}
+        download
         label="Descargar entrega"
         icon={faDownload}
       />
