@@ -44,3 +44,7 @@ export type InstancesResponse = PaginationLegacy<Instance>;
 export type EntregasResponse = Pagination<PartialEntrega>;
 
 export type EntregaDetailResponse = Entrega;
+
+export type CreateTPErrorResponse = {
+  non_field_errors: [string];
+};

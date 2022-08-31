@@ -65,3 +65,38 @@
     };
   };
 };
+
+.nueva-entrega-container {
+  .card-body {
+    min-height: 107px;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    };
+    button {
+      min-width: 90px;
+    };
+    button,
+    .form-control,
+    .form-select {
+      margin-bottom: calc(0.5rem + 21px);
+    };
+    .has-error {
+      button,
+      .form-control,
+      .form-select {
+        margin-bottom: 0;
+      };
+      .text-danger {
+        margin-top: 0.5rem;
+      }
+    }
+    .was-validated {
+      .form-control:invalid,
+      .form-select:invalid {
+        margin-bottom: 0.5rem;
+      };
+    };
+  };
+};

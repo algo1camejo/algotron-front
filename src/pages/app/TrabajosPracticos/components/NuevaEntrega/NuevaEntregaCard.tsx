@@ -4,7 +4,7 @@ import NuevaEntregaForm from './NuevaEntregaForm';
 
 export const NuevaEntregaCard: FC = () => {
   return (
-    <Card>
+    <Card className="nueva-entrega-container">
       <Card.Header>
         Nueva entrega
       </Card.Header>
