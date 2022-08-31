@@ -1,7 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 import EntregaStatusPill from './EntregaStatusPill';
 import EntregaActions from './EntregaActions';
 import { Pagination } from 'src/components/pagination';
@@ -12,15 +13,30 @@ import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
 
 export const EntregasTable: FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   const {
     data,
+    refetch,
+    isLoading,
+    isSuccess,
+    isError,
+    isRefetchError,
   } = useQuery(
     tpsKeys.entregas.list(currentPage),
-    () => getEntregas(currentPage),);
+    () => getEntregas(currentPage),
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
 
   const entregas = data?.data?.results || [];
-  const totalPages = data?.data?.total_pages || 0;
+
+  useEffect(() => {
+    if(data?.data?.total_pages) {
+      setTotalPages(data?.data?.total_pages);
+    }
+  }, [data?.data?.total_pages]);
 
   const handleFirst = () => {
     setCurrentPage(1);
@@ -40,6 +56,10 @@ export const EntregasTable: FC = () => {
 
   const handleLast = () => {
     setCurrentPage(totalPages);
+  };
+
+  const handleRetry = () => {
+    refetch();
   };
 
   const renderEntrega = (entrega: PartialEntrega) => {
@@ -92,18 +112,42 @@ export const EntregasTable: FC = () => {
               </th>
             </tr>
           </thead>
-          {entregas.length > 0 && (
+          {(isSuccess || isRefetchError) && entregas.length > 0 && (
             <tbody>
               {entregas.map(renderEntrega)}
             </tbody>
           )}
         </Table>
-        {entregas.length === 0 && (
+        {(isSuccess || isRefetchError) && entregas.length === 0 && (
           <div className="sin-entregas text-muted">
             <Image src="/static/error/wool-ball-with-paws.svg"/>
             <p>
               No hay entregas
             </p>
+          </div>
+        )}
+        {isLoading && (
+          <div className="sin-entregas text-muted">
+            <Image src="/static/error/wool-ball-with-paws.svg"/>
+            <p>
+              Cargando...
+            </p>
+          </div>
+        )}
+        {isError && !isRefetchError && (
+          <div className="sin-entregas text-muted">
+            <Image src="/static/error/wool-ball-with-paws.svg"/>
+            <p>
+              Ups! Ocurrió un error
+            </p>
+            <Button
+              className="mt-2"
+              onClick={handleRetry}
+              variant="outline-secondary"
+              size="sm"
+            >
+              Reintentar
+            </Button>
           </div>
         )}
       </div>
