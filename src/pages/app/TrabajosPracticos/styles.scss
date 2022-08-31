@@ -17,6 +17,21 @@
     text-align: center;
     margin: 1rem 0 2rem 0;
   };
+  .pruebas {
+    background: var(--bs-gray-900);
+    border-radius: var(--bs-border-radius-sm);
+    margin-bottom: 1rem;
+    width: 100%;
+    div {
+      span {
+        margin-bottom: .5rem;
+      };
+      display: flex;
+      flex-direction: column;
+      color: var(--bs-gray-500);
+      padding: 2rem;
+    };
+  };
   .download-icon-button {
     margin-left: auto;
   };

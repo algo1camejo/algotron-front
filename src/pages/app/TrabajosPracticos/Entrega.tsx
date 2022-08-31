@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import Convert from 'ansi-to-html';
 import Card from 'react-bootstrap/Card';
 import EntregaStatusAlert from './components/EntregaStatusAlert';
 import IconButton from 'src/components/buttons/IconButton';
@@ -8,6 +9,10 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { getEntregaDetail } from 'src/services/tps';
 import { formatDateWithHour } from 'src/utils/dates';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
+
+const convert = new Convert({
+  newline: true,
+});
 
 export const Entrega: FC = () => {
   const { id } = useParams();
@@ -54,11 +59,8 @@ export const Entrega: FC = () => {
             {formatDateWithHour(horario)}
           </Card.Subtitle>
         </div>
-        <Card.Text>
-          Pruebas
-        </Card.Text>
-        <Card.Text>
-          {resultado}
+        <Card.Text as="code" className="pruebas">
+          <div dangerouslySetInnerHTML={{__html: convert.toHtml(resultado)}}></div>
         </Card.Text>
         <Card.Link
           href={archivo}
