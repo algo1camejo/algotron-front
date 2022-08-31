@@ -11,9 +11,13 @@ import {
   LoginData,
   LoginResponse,
   AuthState,
+  AuthError,
+  AUTH_ERRORS,
 } from 'src/types/auth';
 
 const initialState: AuthState = {
+  isError: false,
+  error: AUTH_ERRORS.NO_ERROR,
   isAuthenticated: !!localStorage.getItem('access'),
   user: null,
 };
@@ -43,10 +47,22 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const [state, setState] = useState<AuthState>(initialState);
 
   useEffect(() => {
-    initializeSession();
     const user = getUser();
 
+    const handleInitializeError = (error: AuthError) => {
+      setState({
+        isError: true,
+        error,
+        isAuthenticated: !!user,
+        user,
+      });
+    };
+
+    initializeSession(handleInitializeError);
+
     setState({
+      isError: false,
+      error: AUTH_ERRORS.NO_ERROR,
       isAuthenticated: !!user,
       user,
     });
@@ -72,6 +88,8 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     setSession(access, refresh, user);
 
     setState({
+      isError: false,
+      error: AUTH_ERRORS.NO_ERROR,
       isAuthenticated: true,
       user,
     });
@@ -83,6 +101,8 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     clearSession();
 
     setState({
+      isError: false,
+      error: AUTH_ERRORS.NO_ERROR,
       isAuthenticated: false,
       user: null,
     });

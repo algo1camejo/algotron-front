@@ -1,7 +1,11 @@
 import mem from "mem";
 import api from 'src/config/api';
 import { refreshToken as refreshTokenRequest } from 'src/services/auth';
-import { User } from 'src/types/auth';
+import {
+  User,
+  AuthError,
+  AUTH_ERRORS,
+} from 'src/types/auth';
 
 export const getFullName = (user: User | null): string => (
   [
@@ -10,11 +14,16 @@ export const getFullName = (user: User | null): string => (
   ].filter(str => !!str).join(' ')
 );
 
-export const initializeSession = () => {
+export const initializeSession = (
+  onError: (err: AuthError) => void = () => null,
+) => {
   const access = localStorage.getItem('access');
+  if(!access) {
+    onError(AUTH_ERRORS.CANT_ACCESS);
+    return;
+  }
 
-  if(!access) return;
-  setAuthInterceptors();
+  setAuthInterceptors(onError);
 };
 
 export const getUser = (): User | null => {
@@ -52,7 +61,9 @@ export const clearSession = () => {
   delete api.defaults.headers.common.Authorization;
 };
 
-const setAuthInterceptors = () => {
+const setAuthInterceptors = (
+  onError: (err: AuthError) => void = () => null,
+) => {
   // access token interceptor
   api.interceptors.request.use(
     async (config) => {
@@ -73,9 +84,14 @@ const setAuthInterceptors = () => {
     (response) => response,
     async (error) => {
       const config = error?.config;
-      if(error.response.status === 401 && !config?._retry) {
+      if(error?.config?.url === '/api/token/refresh/') {
+        onError(AUTH_ERRORS.CANT_REFRESH);
+      }
+      else if(error.response.status === 401 && !config?._retry) {
         config._retry = true; // to avoid infinite loop in case there is an error.
+
         await refreshToken();
+
         return api(config);
       }
       return Promise.reject(error);
@@ -87,7 +103,7 @@ const refreshToken = mem(async () =>
   {
     const refresh = localStorage.getItem('refresh');
 
-    if (!refresh) return;
+    if (!refresh) throw new Error('No refresh token');
 
     const { data } = await refreshTokenRequest({ refresh });
 

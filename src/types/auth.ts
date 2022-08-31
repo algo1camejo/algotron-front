@@ -1,3 +1,14 @@
+export const AUTH_ERRORS = {
+  CANT_ACCESS: 'CANT_ACCESS' as const,
+  CANT_REFRESH: 'CANT_REFRESH' as const,
+  NO_ERROR: '' as const,
+};
+
+export type AuthError =
+  'CANT_ACCESS' |
+  'CANT_REFRESH' |
+  '';
+
 export type User = {
   firstName: string;
   lastName: string;
@@ -5,6 +16,8 @@ export type User = {
 };
 
 export type AuthState = {
+  isError: boolean,
+  error: AuthError,
   isAuthenticated: boolean;
   user: User | null;
 };
