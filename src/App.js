@@ -7,10 +7,12 @@ import Login from 'src/pages/auth/Login';
 import Examenes from 'src/pages/app/Examenes';
 import NotFound from 'src/pages/error/NotFound';
 import { AuthGuard, GuestGuard } from 'src/components/guards';
+import {SendRecoveryEmail} from 'src/pages/recovery/SendRecoveryEmail';
 
 function App() {
   return (
     <Routes>
+      <Route path = "/sendRecoveryEmail" element = {<SendRecoveryEmail/>} />
       <Route
         path="login/*"
         element={
