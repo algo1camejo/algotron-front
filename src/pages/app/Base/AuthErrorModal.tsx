@@ -35,7 +35,7 @@ export const AuthErrorModal: FC = () => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Por favor, vuelve a ingresar sesión
+        Por favor, vuelve a iniciar sesión
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={handleLogout}>

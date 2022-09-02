@@ -1,0 +1,17 @@
+.under-construction-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  img {
+    max-height: 350px;
+    max-width: 100%;
+  }
+  p {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--bs-secondary);
+  }
+};
