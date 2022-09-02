@@ -5,9 +5,12 @@ import './styles.scss';
 export const Examenes: FC = () => {
   return (
     <div className="under-construction-container">
-      <Image src="/static/error/under-construction.png"/>
+      <Image
+        alt=""
+        src="/static/error/under-construction.png"
+      />
       <p>
-        Estamos trabajando :)
+        Estamos trabajando <span aria-hidden="true">:)</span>
       </p>
     </div>
   );
