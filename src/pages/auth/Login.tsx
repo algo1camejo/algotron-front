@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import { LoginData } from 'src/types/auth';
+import {Link} from 'react-router-dom';
 import './styles.scss';
 
 export const Login: FC = () => {
@@ -107,6 +108,9 @@ export const Login: FC = () => {
                 >
                   Ingresar
                 </LoadingButton>
+                <div className='forgotPasswordLink'>
+                  <Link to="/sendRecoveryEmail"> Olvidaste tu contraseña?</Link>
+                </div>
               </Form>
             </Card.Body>
           </Card>

@@ -30,4 +30,14 @@
     margin-top: 0.5rem;
     text-align: center;
   };
+  .icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  };
+  .arrow-container{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  };
 };
