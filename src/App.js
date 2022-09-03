@@ -5,9 +5,10 @@ import Home from 'src/pages/app/Home';
 import TrabajosPracticos from 'src/pages/app/TrabajosPracticos';
 import Login from 'src/pages/auth/Login';
 import Examenes from 'src/pages/app/Examenes';
+import PasswordChange from 'src/pages/app/PasswordChange';
 import NotFound from 'src/pages/error/NotFound';
 import { AuthGuard, GuestGuard } from 'src/components/guards';
-import {SendRecoveryEmail} from 'src/pages/recovery/SendRecoveryEmail';
+import {SendRecoveryEmail} from 'src/pages/recovery/SendRecoveryEmail'; 
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="home" element={<Home/>}/>
         <Route path="trabajos-practicos/*" element={<TrabajosPracticos/>}/>
         <Route path="examenes" element={<Examenes/>}/>
+        <Route path="password-change" element={<PasswordChange/>}/>
       </Route>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
