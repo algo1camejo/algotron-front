@@ -1,0 +1,33 @@
+#login-container {
+  img {
+    margin-bottom: 3rem;
+    margin-top: 4rem;
+  }
+  height: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  .row {
+    justify-content: center;
+  };
+  .card-body {
+    .card-title {
+      margin-bottom: 2rem;
+    };
+    padding: 4rem;
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .btn[type="submit"] {
+        margin-top: 2rem;
+        min-width: 200px;
+      };
+    };
+  };
+  .forgotPasswordLink {
+    margin-top: 0.5rem;
+    text-align: center;
+  };
+};
