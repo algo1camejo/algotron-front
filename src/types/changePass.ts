@@ -3,3 +3,8 @@ export interface ChangePassData {
     new_password: string;
     confirm_password: string;
 }
+
+export interface ResetPassData{
+    token : string;
+    password: string;
+}

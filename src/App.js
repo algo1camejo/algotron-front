@@ -9,10 +9,12 @@ import PasswordChange from 'src/pages/app/PasswordChange';
 import NotFound from 'src/pages/error/NotFound';
 import { AuthGuard, GuestGuard } from 'src/components/guards';
 import {SendRecoveryEmail} from 'src/pages/recovery/SendRecoveryEmail'; 
+import {PasswordReset} from './pages/recovery/PasswordReset';
 
 function App() {
   return (
     <Routes>
+      <Route path ="/password-reset" element={<PasswordReset/>}/>
       <Route path = "/sendRecoveryEmail" element = {<SendRecoveryEmail/>} />
       <Route
         path="login/*"

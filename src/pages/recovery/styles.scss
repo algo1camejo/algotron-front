@@ -1,43 +1,21 @@
-#login-container {
-  img {
-    margin-bottom: 3rem;
-    margin-top: 4rem;
-  }
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  .row {
-    justify-content: center;
-  };
-  .card-body {
-    .card-title {
-      margin-bottom: 2rem;
-    };
-    padding: 4rem;
-    form {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .btn[type="submit"] {
-        margin-top: 2rem;
-        min-width: 200px;
-      };
-    };
-  };
-  .forgotPasswordLink {
-    margin-top: 0.5rem;
-    text-align: center;
-  };
-  .icon-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  };
-  .arrow-container{
-    display: flex;
-    justify-content: right;
-    align-items: center;
-  };
+  img {
+    max-height: 150px;
+    max-width: 100%;
+  }
+  p {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 };
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
