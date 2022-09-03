@@ -6,11 +6,14 @@ import { Col,
   Form,
   Stack} from 'react-bootstrap';
 import LoadingButton from 'src/components/buttons/LoadingButton';
+import { useAuth } from 'src/hooks';
+import { changePassword } from 'src/services/pass';
 import { ChangePassData } from 'src/types/changePass';
 import './styles.scss';
 
 export function PasswordChange() {
 
+  const { logout } = useAuth();
   const [passwordsType, setPasswordsType] = useState<'password' | 'text'>('password');
   const [validated, setValidated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,6 +32,18 @@ export function PasswordChange() {
   const isPasswordStrong = (password: string) => {
     const strongRegex = new RegExp(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/gm);
     return strongRegex.test(password);
+  }
+
+  const sendRequest = async () => {
+    setIsLoading(true);
+    try{
+      await changePassword(formData);
+      alert('Contraseña cambiada con éxito!');
+      logout();
+    } catch (error) {
+      setErrorMessage('La contraseña actual no es correcta');
+    }
+    setIsLoading(false);
   }
 
   const handleSubmit = (event: any) => {
@@ -55,8 +70,7 @@ export function PasswordChange() {
       setErrorMessage('La nueva contraseña debe ser diferente a la anterior');
       return;
     }
-    
-    alert('Enviando Request');
+    sendRequest();
   };
 
   const handleChange = (event: any) => {
