@@ -64,6 +64,7 @@ export const clearSession = () => {
 const setAuthInterceptors = (
   onError: (err: AuthError) => void = () => null,
 ) => {
+  
   // access token interceptor
   api.interceptors.request.use(
     async (config) => {
@@ -113,3 +114,21 @@ const refreshToken = mem(async () =>
   },
   { maxAge: 1000 * 30 } // 30 seconds
 );
+
+export const setToken = () =>{
+
+  api.interceptors.request.use(
+    async (config) => {
+      const access = localStorage.getItem('access');
+      if (access) {
+        config.headers = {
+          ...config.headers,
+          authorization: `Bearer ${access}`,
+        };
+      }
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
+
+}

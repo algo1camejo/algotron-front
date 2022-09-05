@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from 'src/config/query';
+import {setToken} from './utils/auth.ts';
+
+//To run before the app is rendered, then is overriden by another one.
+setToken();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
