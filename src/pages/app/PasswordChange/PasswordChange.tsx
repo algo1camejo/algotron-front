@@ -12,27 +12,26 @@ import { ChangePassData } from 'src/types/changePass';
 import './styles.scss';
 
 export function PasswordChange() {
-
-  const { logout } = useAuth();
   const [passwordsType, setPasswordsType] = useState<'password' | 'text'>('password');
   const [validated, setValidated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  
   const [formData, setFormData] = useState<ChangePassData>({
     old_password: '',
     new_password: '',
     confirm_password: '',
-  })
+  });
+
+  const { logout } = useAuth();
 
   const togglePasswordShow = () => {
     setPasswordsType(passwordsType === 'password' ? 'text' : 'password');
-  }
+  };
 
   const isPasswordStrong = (password: string) => {
     const strongRegex = new RegExp(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/gm);
     return strongRegex.test(password);
-  }
+  };
 
   const sendRequest = async () => {
     setIsLoading(true);
@@ -44,7 +43,7 @@ export function PasswordChange() {
       setErrorMessage('La contraseña actual no es correcta');
     }
     setIsLoading(false);
-  }
+  };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -70,12 +69,12 @@ export function PasswordChange() {
       setErrorMessage('La nueva contraseña debe ser diferente a la anterior');
       return;
     }
+
     sendRequest();
   };
 
   const handleChange = (event: any) => {
     setErrorMessage('');
-    console.log(formData);
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value })
   };
@@ -84,7 +83,7 @@ export function PasswordChange() {
     <Container
       id="login-container"
       fluid="md"
-      >
+    >
       <Row>
         <Col md={6}>
           <Card>
@@ -102,7 +101,6 @@ export function PasswordChange() {
                   gap={3}
                   disabled={isLoading}
                 >
-
                   <Form.Group controlId="old_password">
                     <Form.Label>Contraseña actual</Form.Label>
                     <Form.Control
@@ -116,7 +114,6 @@ export function PasswordChange() {
                       Este campo es obligatorio
                     </Form.Control.Feedback>
                   </Form.Group>
-
                   <Form.Group controlId="new_password">
                     <Form.Label>Nueva contraseña </Form.Label>
                     <Form.Control
@@ -130,7 +127,6 @@ export function PasswordChange() {
                       Este campo es obligatorio
                     </Form.Control.Feedback>
                   </Form.Group>
-
                   <Form.Group controlId="confirm_password">
                     <Form.Label>Repetir nueva contraseña </Form.Label>
                     <Form.Control
@@ -144,7 +140,6 @@ export function PasswordChange() {
                       Este campo es obligatorio
                     </Form.Control.Feedback>
                   </Form.Group>
-
                   <Form.Group className="mb-3" onClick={togglePasswordShow}>
                     <Form.Check
                       type="checkbox"
@@ -152,7 +147,6 @@ export function PasswordChange() {
                       checked={passwordsType === 'text'}
                       />
                   </Form.Group>
-
                   {errorMessage.length > 0 && (
                     <Form.Text className="text-danger text-center">
                       {errorMessage}

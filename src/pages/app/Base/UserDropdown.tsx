@@ -1,16 +1,16 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useAuth } from 'src/hooks';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {useNavigate} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { getFullName } from 'src/utils/auth';
 
-export const UserDropdown = () => {
+export const UserDropdown: FC = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const onChangePassword = () => {
-      navigate('/password-change');
+    navigate('/password-change');
   };
 
   return (
@@ -23,19 +23,16 @@ export const UserDropdown = () => {
       <NavDropdown.ItemText className="text-center">
         Padrón: {user?.padron}
       </NavDropdown.ItemText>
-
       <NavDropdown.ItemText className="d-grid">
         <Button
-          variant="outline-info"
+          variant="outline-dark"
           data-toggle="dropdown"
           size="sm"
           onClick={onChangePassword}
-          >
+        >
           Cambiar clave
         </Button>
       </NavDropdown.ItemText>
-
-
       <NavDropdown.Divider />
       <NavDropdown.ItemText className="d-grid">
         <Button
@@ -48,6 +45,6 @@ export const UserDropdown = () => {
       </NavDropdown.ItemText>
     </NavDropdown>
   );
-}
+};
 
 export default UserDropdown;
