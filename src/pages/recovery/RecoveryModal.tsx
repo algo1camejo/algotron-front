@@ -1,18 +1,21 @@
-import React from 'react'
+import { FC } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-interface RecoveryModalProps {
+
+export type RecoveryModalProps = {
   show: boolean;
   handleClose: () => void;
   email: string;
   success: boolean;
-}
+};
 
-export default function RecoveryModal( {
-  show,
-  handleClose,
-  email,
-  success} : RecoveryModalProps) {
+export const RecoveryModal: FC<RecoveryModalProps> = (props) => {
+  const {
+    show,
+    handleClose,
+    email,
+    success,
+  } = props;
 
   const generateMessage = () => {
     if (success) {
@@ -28,13 +31,13 @@ export default function RecoveryModal( {
             El correo <strong>{email}</strong> no se encuentra registrado en el curso.
           </p>
           <p style={{ whiteSpace: 'break-spaces' }}>
-            {"Esta seguro que es el que utiliza en la materia?\n"}
-            {"En caso de que sea asi, por favor contacte a los docentes"}
+            {"¿Esta seguro que es el que utiliza en la materia?\n"}
+            {"En caso de que sea asi, por favor, contacte a los docentes."}
           </p>
         </div>
       );
     }
-  }
+  };
 
   const generateTitle = () => {
     if (success) {
@@ -42,12 +45,11 @@ export default function RecoveryModal( {
     } else{
       return "Correo no encontrado";
     }
-  }
+  };
 
   return (
     <Modal
       show={show}
-      //onHide={handleLogout}
       backdrop="static"
       keyboard={false}
     >
@@ -65,5 +67,7 @@ export default function RecoveryModal( {
         </Button>
       </Modal.Footer>
     </Modal>
-  )
-}
+  );
+};
+
+export default RecoveryModal;

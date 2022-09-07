@@ -79,7 +79,7 @@ body {
 .btn-danger:visited,
 .btn-danger:focus,
 {
-  color: $light;
+  color: $light !important;
 }
 
 .btn-primary:disabled,

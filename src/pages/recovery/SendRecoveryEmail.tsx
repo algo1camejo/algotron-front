@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -7,12 +8,11 @@ import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import LoadingButton from 'src/components/buttons/LoadingButton';
-import './styles.scss';
+import IconButton from 'src/components/buttons/IconButton';
 import RecoveryModal from './RecoveryModal';
-import { useNavigate } from 'react-router-dom'
 import { sendPasswordReset } from 'src/services/pass';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import './styles.scss';
 
 export const SendRecoveryEmail = () => {
   const navigate = useNavigate();
@@ -37,6 +37,7 @@ export const SendRecoveryEmail = () => {
       setValidated(true);
       return;
     }
+
     setLoading(true);
     makeRequest();
   };
@@ -56,74 +57,72 @@ export const SendRecoveryEmail = () => {
   const handleCloseModal = () => {
     if (success) {
       navigate('/');
-    }else{
+    } else{
       setShowModal(false); 
     }
   };
 
   return (
-  <Container
-    id="login-container"
-    fluid="md"
+    <Container
+      id="recovery-container"
+      fluid="md"
     >
-    <Row>
-      <Col className= "arrow-container">
-        <div style={{paddingTop:12}}>
-          <FontAwesomeIcon
-            icon={faArrowLeft}
-            size="3x" 
+      <Row className="logo-container">
+        <Col className="arrow-container">
+          <IconButton
+            label="volver"
             onClick={() => navigate('/')}
-            />
-        </div>
-      </Col>
-      <Col className = "icon-container">
-        <Image src="/static/logos/logo-light.svg"/>
-      </Col>
-      <Col>
-      </Col>
-    </Row>
-    <Row>
-      <Col md={6}>
-        <Card>
-          <Card.Body>
-            <Card.Title>
-              Recuperación de contraseña
-            </Card.Title>
-            <Form
-              onSubmit={handleSubmit}
-              noValidate
-              validated={validated}
-            >
-              <Stack
-                as="fieldset"
-                gap={3}
-              >
-                <Form.Group controlId="login-email">
-                  <Form.Label>Correo electrónico</Form.Label>
-                  <Form.Control
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="Correo electrónico utilizado en el curso"
-                    onChange={handleChange}
-                    disabled={loading}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Ingrese un mail válido
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Stack>
-                <LoadingButton
-                  type="submit"
-                  isLoading={loading}
-                  disabled={loading}
-                >
-                  {loading ? 'Recuperando...' : 'Recuperar'}
-                </LoadingButton>
-              </Form>
-            </Card.Body>
-          </Card>
+            icon={faArrowLeft}
+          />
         </Col>
+        <Col className="icon-container">
+          <Image src="/static/logos/logo-light.svg"/>
+        </Col>
+        <Col>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6}>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                Recuperación de contraseña
+              </Card.Title>
+              <Form
+                onSubmit={handleSubmit}
+                noValidate
+                validated={validated}
+              >
+                <Stack
+                  as="fieldset"
+                  gap={3}
+                >
+                  <Form.Group controlId="login-email">
+                    <Form.Label>Correo electrónico</Form.Label>
+                    <Form.Control
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="Correo electrónico utilizado en el curso"
+                      onChange={handleChange}
+                      disabled={loading}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Ingrese un mail válido
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Stack>
+                  <LoadingButton
+                    type="submit"
+                    isLoading={loading}
+                    disabled={loading}
+                  >
+                    {loading ? 'Recuperando...' : 'Recuperar'}
+                  </LoadingButton>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
       </Row>
       <RecoveryModal
         show={showModal}
@@ -132,5 +131,7 @@ export const SendRecoveryEmail = () => {
         success={success}
       />
     </Container>
-  )
-}
+  );
+};
+
+export default SendRecoveryEmail;

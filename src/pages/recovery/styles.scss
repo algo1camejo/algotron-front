@@ -15,7 +15,50 @@
   }
 };
 
+#recovery-container {
+  height: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  .row {
+    justify-content: center;
+  };
+  .logo-container {
+    .col {
+      margin-bottom: 0;
+    };
+    margin-bottom: 3rem;
+    margin-top: 4rem;
+    .icon-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    };
+    .arrow-container{
+      display: flex;
+      justify-content: right;
+      align-items: center;
+    };
+  };
+  .card-body {
+    .card-title {
+      margin-bottom: 2rem;
+    };
+    padding: 4rem;
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .btn[type="submit"] {
+        margin-top: 2rem;
+        min-width: 200px;
+      };
+    };
+  };
+};
+
 @keyframes spin {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
-}
+};

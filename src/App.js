@@ -14,8 +14,8 @@ import {PasswordReset} from './pages/recovery/PasswordReset';
 function App() {
   return (
     <Routes>
-      <Route path ="/password-reset" element={<PasswordReset/>}/>
-      <Route path = "/sendRecoveryEmail" element = {<SendRecoveryEmail/>} />
+      <Route path="/password-reset" element={<PasswordReset/>}/>
+      <Route path="/send-recovery-email" element={<SendRecoveryEmail/>}/>
       <Route
         path="login/*"
         element={

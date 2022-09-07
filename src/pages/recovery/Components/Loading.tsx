@@ -1,7 +1,8 @@
-import React from 'react'
+import { FC } from 'react'
 import { Container } from 'react-bootstrap'
 import '../styles.scss';
-export default function Loading() {
+
+export const Loading: FC = () => {
   return (
     <Container className="info-container">
       <img
@@ -9,7 +10,9 @@ export default function Loading() {
         alt=""
         src="/static/tron/normal.svg"
       />
-      <p> Cargando...</p>
+      <p>Cargando...</p>
     </Container>
-  )
-}
+  );
+};
+
+export default Loading;

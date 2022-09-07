@@ -1,5 +1,12 @@
-import React, { useEffect, useState} from 'react'
-import { Card, Col, Container, Form, Row, Stack } from 'react-bootstrap';
+import { FC, useEffect, useState } from 'react'
+import {
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Stack,
+} from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 import { LoadingButton } from 'src/components/buttons';
 import { isResetTokenValid, resetPassword } from 'src/services/pass';
@@ -8,20 +15,21 @@ import Success from './Components/Sucess';
 import TokenNotValid from './Components/TokenNotValid';
 import './styles.scss';
 
-interface ResetPasswordValues {
+type ResetPasswordValues = {
   password: string;
   confirm_password: string;
-}
+};
 
-export function PasswordReset() {
+export const PasswordReset: FC = () => {
   const [searchParams] = useSearchParams();
   const [passwordsType, setPasswordsType] = useState<'password' | 'text'>('password');
-  const token = searchParams.get('token');
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
   const [validated, setValidated] = useState<boolean>(false);
-  const [ValidToken, setValidToken] = React.useState(false);
+  const [ValidToken, setValidToken] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [done, setDone] = useState(false);
+
+  const token = searchParams.get('token');
 
   const [formData, setFormData] = useState<ResetPasswordValues>({
     password: '',
@@ -30,50 +38,52 @@ export function PasswordReset() {
   
   const togglePasswordShow = () => {
     setPasswordsType(passwordsType === 'password' ? 'text' : 'password');
-  }
+  };
 
   const isPasswordStrong = (password: string) => {
     const strongRegex = new RegExp(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/gm);
     return strongRegex.test(password);
-  }
+  };
 
   const validateToken = async () => {
     if (!token) {
       setLoading(false);
       return;
     }
-    try{
-      const res = await isResetTokenValid(token);
+
+    try {
+      await isResetTokenValid(token);
       setValidToken(true)
-    }catch(err){
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     setTimeout(() => {
       validateToken();
     }, 3000);// Para que brille el loading de Tron.
-  },[]);
+  }, []);
 
   const sendRequest = async () => {
-    
     if (!token) {
       setValidToken(false);
       return;
     }
 
     setLoading(true);
+
     try{
         await resetPassword({token, password: formData.password});
       setDone(true);
     } catch (error) {
       setErrorMessage('Ocurrio un error inesperado, comunicate con un docente');
       setValidToken(false);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  }
-  
+  };
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
@@ -93,6 +103,7 @@ export function PasswordReset() {
       setErrorMessage('Las contraseñas no coinciden');
       return;
     }
+
     sendRequest();
   };
 
@@ -149,7 +160,6 @@ export function PasswordReset() {
                       Este campo es obligatorio
                     </Form.Control.Feedback>
                   </Form.Group>
-
                   <Form.Group controlId="confirm_password">
                     <Form.Label>Repetir nueva contraseña </Form.Label>
                     <Form.Control
@@ -163,7 +173,6 @@ export function PasswordReset() {
                       Este campo es obligatorio
                     </Form.Control.Feedback>
                   </Form.Group>
-
                   <Form.Group className="mb-3" onClick={togglePasswordShow}>
                     <Form.Check
                       type="checkbox"
@@ -171,7 +180,6 @@ export function PasswordReset() {
                       checked={passwordsType === 'text'}
                       />
                   </Form.Group>
-
                   {errorMessage.length > 0 && (
                     <Form.Text className="text-danger text-center">
                       {errorMessage}

@@ -108,8 +108,8 @@ export const Login: FC = () => {
                 >
                   Ingresar
                 </LoadingButton>
-                <div className='forgotPasswordLink'>
-                  <Link to="/sendRecoveryEmail"> Olvidaste tu contraseña?</Link>
+                <div className='forgot-password-link'>
+                  <Link to="/send-recovery-email">¿Olvidaste tu contraseña?</Link>
                 </div>
               </Form>
             </Card.Body>

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 type NewButtonProps = {
   label: string;
   icon: any;
-} & ButtonProps
+} & ButtonProps;
 
 export type IconButtonProps<
   As extends React.ElementType = 'button'
