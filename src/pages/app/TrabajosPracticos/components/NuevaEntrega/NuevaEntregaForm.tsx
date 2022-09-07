@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { FC, useState, useEffect } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
@@ -20,6 +20,8 @@ type Error = {
 export const NuevaEntregaForm: FC = () => {
   const [validated, setValidated] = useState<boolean>(false);
 
+  const queryClient = useQueryClient();
+
   const {
     data,
     isLoading,
@@ -33,6 +35,18 @@ export const NuevaEntregaForm: FC = () => {
   const createMutation = useMutation<any, Error, any>(createTP);
 
   const error = createMutation?.error?.response?.data?.non_field_errors[0];
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if(createMutation.isSuccess) {
+      timer = setTimeout(createMutation.reset, 5000);
+    }
+
+    return () => {
+      timer && clearTimeout(timer);
+    };
+  }, [createMutation.isSuccess, createMutation.reset]);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -49,6 +63,7 @@ export const NuevaEntregaForm: FC = () => {
     try {
       await createMutation.mutateAsync(new FormData(form));
       form.reset();
+      queryClient.invalidateQueries(tpsKeys.entregas.allList());
     } finally {
       setValidated(false);
     }
@@ -60,12 +75,14 @@ export const NuevaEntregaForm: FC = () => {
     </option>
   );
 
+  const hasMessage = createMutation.isError || createMutation.isSuccess;
+
   return (
     <Form
       onSubmit={handleSubmit}
       noValidate
       validated={validated}
-      className={createMutation.isError ? 'has-error' : undefined}
+      className={hasMessage ? 'has-message' : undefined}
     >
       <Stack
         as="fieldset"
@@ -116,6 +133,11 @@ export const NuevaEntregaForm: FC = () => {
       {createMutation.isError && (
         <Form.Text className="text-danger">
           {error}
+        </Form.Text>
+      )}
+      {createMutation.isSuccess && (
+        <Form.Text className="text-success">
+          Se realizó la entrega correctamente!
         </Form.Text>
       )}
     </Form>
