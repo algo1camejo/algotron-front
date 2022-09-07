@@ -1,10 +1,13 @@
 import { FC, useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Table from 'react-bootstrap/Table';
-import Image from 'react-bootstrap/Image';
-import Button from 'react-bootstrap/Button';
 import EntregaStatusPill from './EntregaStatusPill';
 import EntregaActions from './EntregaActions';
+import {
+  ErrorWithRetry,
+  NoData,
+  Loading,
+} from 'src/components/messages';
 import { Pagination } from 'src/components/pagination';
 import { PartialEntrega } from 'src/types/tps';
 import { getEntregas } from 'src/services/tps';
@@ -119,36 +122,13 @@ export const EntregasTable: FC = () => {
           )}
         </Table>
         {(isSuccess || isRefetchError) && entregas.length === 0 && (
-          <div className="sin-entregas text-muted">
-            <Image src="/static/error/wool-ball-with-paws.svg"/>
-            <p>
-              No hay entregas
-            </p>
-          </div>
+          <NoData label="No hay entregas"/>
         )}
         {isLoading && (
-          <div className="sin-entregas text-muted">
-            <Image src="/static/error/wool-ball-with-paws.svg"/>
-            <p>
-              Cargando...
-            </p>
-          </div>
+          <Loading/>
         )}
         {isError && !isRefetchError && (
-          <div className="sin-entregas text-muted">
-            <Image src="/static/error/wool-ball-with-paws.svg"/>
-            <p>
-              Ups! Ocurrió un error
-            </p>
-            <Button
-              className="mt-2"
-              onClick={handleRetry}
-              variant="outline-secondary"
-              size="sm"
-            >
-              Reintentar
-            </Button>
-          </div>
+          <ErrorWithRetry onRetry={handleRetry}/>
         )}
       </div>
       <Pagination

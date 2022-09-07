@@ -1,0 +1,28 @@
+%message {
+  text-align: center;
+  img {
+    opacity: 0.8;
+    width: 210px;
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  };
+  p {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-size: 1.25rem;
+    font-weight: lighter;
+  };
+};
+
+.error-with-retry {
+  @extend %message;
+};
+
+.no-data {
+  @extend %message;
+};
+
+.loading {
+  @extend %message;
+};

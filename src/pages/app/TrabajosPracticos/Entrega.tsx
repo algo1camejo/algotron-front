@@ -4,11 +4,24 @@ import { useParams } from 'react-router-dom';
 import Convert from 'ansi-to-html';
 import Card from 'react-bootstrap/Card';
 import EntregaStatusAlert from './components/EntregaStatusAlert';
+import {
+  ErrorWithRetry,
+  NoData,
+  Loading,
+} from 'src/components/messages';
 import IconButton from 'src/components/buttons/IconButton';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { AxiosResponse } from 'axios';
+import { EntregaDetailResponse } from 'src/types/tps';
 import { getEntregaDetail } from 'src/services/tps';
 import { formatDateWithHour } from 'src/utils/dates';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
+
+type Error = {
+  response: AxiosResponse<EntregaDetailResponse>;
+};
+
+type Data = AxiosResponse<EntregaDetailResponse>;
 
 const convert = new Convert({
   newline: true,
@@ -19,7 +32,12 @@ export const Entrega: FC = () => {
 
   const {
     data,
-  } = useQuery(
+    error,
+    refetch,
+    isLoading,
+    isRefetchError,
+    isError,
+  } = useQuery<Data, Error, any>(
     tpsKeys.entregas.detail(Number(id)),
     () => getEntregaDetail(Number(id)),
     {
@@ -28,8 +46,31 @@ export const Entrega: FC = () => {
   );
 
   const entrega = data?.data;
+  const isNotFound = error?.response?.status === 404;
+  const isEnabled = !!Number(id);
 
-  if (!entrega) return null;
+  const handleRetry = () => {
+    refetch();
+  };
+
+  if (!entrega) {
+    return (
+      <>
+        {isLoading && isEnabled && (
+          <Loading/>
+        )}
+        {!isEnabled && (
+          <NoData label="No se encontró la entrega"/>
+        )}
+        {isError && !isRefetchError && isNotFound && (
+          <NoData label="No se encontró la entrega"/>
+        )}
+        {isError && !isRefetchError && !isNotFound && (
+          <ErrorWithRetry onRetry={handleRetry}/>
+        )}
+      </>
+    );
+  }
 
   const {
     get_estado_display,
