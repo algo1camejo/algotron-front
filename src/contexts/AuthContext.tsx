@@ -1,4 +1,6 @@
 import { FC, ReactNode, createContext, useState, useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import * as authService from 'src/services/auth';
 import {
@@ -45,6 +47,9 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const { children } = props;
 
   const [state, setState] = useState<AuthState>(initialState);
+
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = getUser();
@@ -99,6 +104,8 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
 
   const logout = () => {
     clearSession();
+    queryClient.clear();
+    navigate('/');
 
     setState({
       isError: false,
