@@ -45,25 +45,25 @@ export const PasswordReset: FC = () => {
     return strongRegex.test(password);
   };
 
-  const validateToken = async () => {
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      await isResetTokenValid(token);
-      setValidToken(true)
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const validateToken = async () => {
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        await isResetTokenValid(token);
+        setValidToken(true)
+      } finally {
+        setLoading(false);
+      }
+    };
+
     setTimeout(() => {
       validateToken();
     }, 3000);// Para que brille el loading de Tron.
-  }, []);
+  }, [token]);
 
   const sendRequest = async () => {
     if (!token) {
