@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
 
     steps:
     - uses: actions/checkout@master
@@ -22,8 +24,6 @@ jobs:
 
     - name: Build page
       run: npm run build
-      env:
-        REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
