@@ -11,6 +11,8 @@ import {setToken} from './utils/auth.ts';
 //To run before the app is rendered, then is overriden by another one.
 setToken();
 
+document.title = "AlgoTron";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
