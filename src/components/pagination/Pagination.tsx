@@ -44,6 +44,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
     if(total < max) {
       if(first > 1) {
         first -= (max - total);
+        first = first > 0 ? first : 1;
       }
       else if(last < totalPages) {
         last += (max - total);
