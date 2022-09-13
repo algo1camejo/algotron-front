@@ -16,6 +16,7 @@ import { EntregaDetailResponse } from 'src/types/tps';
 import { getEntregaDetail } from 'src/services/tps';
 import { formatDateWithHour } from 'src/utils/dates';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
+import './styles.scss';
 
 type Error = {
   response: AxiosResponse<EntregaDetailResponse>;
