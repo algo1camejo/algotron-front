@@ -102,7 +102,14 @@ export const Entrega: FC = () => {
           </Card.Subtitle>
         </div>
         <Card.Text as="code" className="pruebas">
-          <div dangerouslySetInnerHTML={{__html: convert.toHtml(resultado)}}></div>
+          {resultado && (
+            <div dangerouslySetInnerHTML={{__html: convert.toHtml(resultado)}}></div>
+          )}
+          {!resultado && (
+            <div>
+              Pendiente...
+            </div>
+          )}
         </Card.Text>
         <Card.Link
           href={archivo}
