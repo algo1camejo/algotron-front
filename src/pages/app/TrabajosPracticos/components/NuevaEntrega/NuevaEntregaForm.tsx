@@ -4,13 +4,12 @@ import { useMutation } from '@tanstack/react-query';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import LoadingButton from 'src/components/buttons/LoadingButton';
-import { getActiveInstances } from 'src/services/tps';
 import {
   Instance,
   CreateTPErrorResponse,
 } from 'src/types/tps';
 import { AxiosResponse } from 'axios';
-import { createTP } from 'src/services/tps';
+import { getActiveInstances, createTP } from 'src/services/tps';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
 
 type Error = {
@@ -34,7 +33,13 @@ export const NuevaEntregaForm: FC = () => {
 
   const createMutation = useMutation<any, Error, any>(createTP);
 
-  const error = createMutation?.error?.response?.data?.non_field_errors[0];
+  const errorData = createMutation?.error?.response?.data;
+  const error = (
+    errorData?.non_field_errors ||
+    errorData?.archivo ||
+    errorData?.tp ||
+    ['Ocurrió un error inesperado']
+  )[0];
 
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
