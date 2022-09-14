@@ -1,9 +1,14 @@
 export const formatDateWithHour = (dateToFormat: string) => {
   const date = new Date(dateToFormat);
 
-  const localeDate = date.toLocaleDateString();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-
-  return `${localeDate} ${hours}:${minutes}`;
+  return date.toLocaleString(
+    'es',
+    {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    },
+  );
 };
