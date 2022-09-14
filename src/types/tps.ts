@@ -46,5 +46,7 @@ export type EntregasResponse = Pagination<PartialEntrega>;
 export type EntregaDetailResponse = Entrega;
 
 export type CreateTPErrorResponse = {
-  non_field_errors: [string];
+  non_field_errors?: [string];
+  archivo?: [string];
+  tp?: [string];
 };
