@@ -18,10 +18,11 @@ export type Resultados = {
 };
 
 export type Instance = {
-  id: number,
-  nombre: string,
-  apertura: string,
-  cierre: string,
+  id: number;
+  nombre: string;
+  apertura: string;
+  cierre: string;
+  enunciado: string | null;
 };
 
 export type Entrega =
@@ -31,10 +32,10 @@ export type Entrega =
   };
 
 export type PartialEntrega = {
-  id: number,
-  get_estado_display: EntregaStatus,
-  tp: EntregaInstance,
-  horario: string,
+  id: number;
+  get_estado_display: EntregaStatus;
+  tp: EntregaInstance;
+  horario: string;
   archivo: string;
 };
 

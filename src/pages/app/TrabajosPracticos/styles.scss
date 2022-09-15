@@ -58,6 +58,9 @@
   .card-body {
     min-height: 107px;
     form {
+      fieldset {
+        align-items: flex-start;
+      }
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -89,5 +92,14 @@
         margin-bottom: 0.5rem;
       };
     };
+    .has-text {
+      a:hover {
+        color: var(--bs-gray-700);
+      };
+      .form-control,
+      .form-select {
+        margin-bottom: calc(0.5rem - 3px);
+      };
+    }
   };
 };

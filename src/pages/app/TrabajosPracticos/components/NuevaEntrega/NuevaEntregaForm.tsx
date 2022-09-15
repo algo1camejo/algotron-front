@@ -18,6 +18,7 @@ type Error = {
 
 export const NuevaEntregaForm: FC = () => {
   const [validated, setValidated] = useState<boolean>(false);
+  const [enunciado, setEnunciado] = useState<string | null>(null);
 
   const queryClient = useQueryClient();
 
@@ -74,8 +75,16 @@ export const NuevaEntregaForm: FC = () => {
     }
   };
 
+  const handleSelect = (instance: Instance | null) => {
+    setEnunciado(instance ? instance.enunciado : null);
+  };
+
   const renderOption = (instance: Instance) => (
-    <option key={instance?.id} value={instance?.id}>
+    <option
+      key={instance?.id}
+      value={instance?.id}
+      onClick={() => handleSelect(instance)}
+    >
       {instance?.nombre}
     </option>
   );
@@ -95,7 +104,10 @@ export const NuevaEntregaForm: FC = () => {
         gap={3}
         disabled={createMutation.isLoading}
       >
-        <Form.Group controlId="seleccionar-entrega">
+        <Form.Group
+          controlId="seleccionar-entrega"
+          className={enunciado ? 'has-text' : undefined}
+        >
           <Form.Label className="visually-hidden">
             Entrega
           </Form.Label>
@@ -103,12 +115,28 @@ export const NuevaEntregaForm: FC = () => {
             name="tp"
             required
           >
-            <option value="">Selecciona una instancia</option>
+            <option
+              value=""
+              onClick={() => handleSelect(null)}
+            >
+              Selecciona una instancia
+            </option>
             {isLoading && (
               <option disabled>Cargando...</option>
             )}
             {list.map(renderOption)}
           </Form.Select>
+          {enunciado && (
+            <Form.Text
+              as="a"
+              href={enunciado}
+              download
+              target="_blank"
+              rel="noreferrer"
+            >
+              Descargar enunciado
+            </Form.Text>
+          )}
           <Form.Control.Feedback type="invalid">
             Este campo es obligatorio
           </Form.Control.Feedback>
