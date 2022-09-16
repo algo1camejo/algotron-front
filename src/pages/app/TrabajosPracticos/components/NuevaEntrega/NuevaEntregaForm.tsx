@@ -75,15 +75,22 @@ export const NuevaEntregaForm: FC = () => {
     }
   };
 
-  const handleSelect = (instance: Instance | null) => {
-    setEnunciado(instance ? instance.enunciado : null);
+  const handleSelect = (event: any) => {
+    const { value } = event.target;
+    const instance = list.find((instance) => instance?.id?.toString() === value);
+
+    if (!value || !instance) {
+      setEnunciado(null);
+      return;
+    }
+
+    setEnunciado(instance.enunciado);
   };
 
   const renderOption = (instance: Instance) => (
     <option
       key={instance?.id}
       value={instance?.id}
-      onClick={() => handleSelect(instance)}
     >
       {instance?.nombre}
     </option>
@@ -114,11 +121,9 @@ export const NuevaEntregaForm: FC = () => {
           <Form.Select
             name="tp"
             required
+            onChange={handleSelect}
           >
-            <option
-              value=""
-              onClick={() => handleSelect(null)}
-            >
+            <option value="">
               Selecciona una instancia
             </option>
             {isLoading && (
