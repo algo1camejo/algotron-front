@@ -13,10 +13,12 @@ import NotFound from 'src/pages/error/NotFound';
 import { AuthGuard, GuestGuard } from 'src/components/guards';
 import { SendRecoveryEmail } from 'src/pages/recovery/SendRecoveryEmail';
 import { PasswordReset } from './pages/recovery/PasswordReset';
+import WebPage from './pages/app/WebPage';
 
 function App() {
   return (
     <Routes>
+      <Route path = "/page" element = {<WebPage/>} />
       <Route path="/password-reset" element={<PasswordReset/>}/>
       <Route path="/send-recovery-email" element={<SendRecoveryEmail/>}/>
       <Route
