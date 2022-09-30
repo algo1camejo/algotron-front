@@ -76,9 +76,13 @@ export const PasswordReset: FC = () => {
     try{
         await resetPassword({token, password: formData.password});
       setDone(true);
-    } catch (error) {
-      setErrorMessage('Ocurrio un error inesperado, comunicate con un docente');
-      setValidToken(false);
+    } catch (error : any) {
+      console.log(error);
+      if(error.response.data.password){
+        setErrorMessage(error.response.data.password);
+      }else{
+        setErrorMessage('Ocurrio un error inesperado, comunicate con un docente');
+      }
     } finally {
       setLoading(false);
     }
