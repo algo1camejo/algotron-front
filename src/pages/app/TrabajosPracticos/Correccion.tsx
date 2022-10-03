@@ -82,12 +82,13 @@ export const Correccion = () => {
     nota,
     correccion,
     corrector,
+    corregido
   } = entrega as EntregaDetailResponse;
 
   const titulo = entrega.tp.nombre;
 
 
-  if(!corrector || !correccion || !nota || !titulo){
+  if(!corrector || !correccion || !nota || !titulo || !corregido){
     return <NoData label="No se encontró la corrección"/>
   }
 
