@@ -74,7 +74,7 @@ export const Entrega: FC = () => {
   }
 
   const {
-    get_estado_display,
+    estado,
     tp,
     horario,
     archivo,
@@ -83,7 +83,7 @@ export const Entrega: FC = () => {
 
   return (
     <Card className="entrega-container">
-      <EntregaStatusAlert status={get_estado_display}/>
+      <EntregaStatusAlert status={estado}/>
       <Card.Body>
         <IconButton
           as="a"

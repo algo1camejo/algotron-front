@@ -15,6 +15,7 @@ import { formatDateWithHour } from 'src/utils/dates';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
 
 export const EntregasTable: FC = () => {
+  console.log('EntregasTable');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
 
@@ -68,16 +69,17 @@ export const EntregasTable: FC = () => {
   const renderEntrega = (entrega: PartialEntrega) => {
     const {
       id,
-      get_estado_display,
+      estado,
       tp,
       horario,
       archivo,
+      corregido,
     } = entrega;
 
     return (
       <tr key={id}>
         <td>
-          <EntregaStatusPill status={get_estado_display}/>
+          <EntregaStatusPill status={estado}/>
         </td>
         <td>
           {tp?.nombre}
@@ -89,6 +91,7 @@ export const EntregasTable: FC = () => {
           <EntregaActions
             id={id}
             archivo={archivo}
+            corregido={corregido}
           />
         </td>
       </tr>

@@ -25,6 +25,13 @@ export const Login: FC = () => {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
+    if (name === 'email' && value.length > 0) {
+      setFormData({
+        ...formData,
+        email: value.toLowerCase()
+      });
+      return;
+    }
     setFormData({ ...formData, [name]: value })
   };
 
@@ -38,7 +45,6 @@ export const Login: FC = () => {
       setValidated(true);
       return;
     }
-
     loginMutation.mutate(formData);
   };
 
