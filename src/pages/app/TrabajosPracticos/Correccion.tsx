@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
@@ -22,15 +21,6 @@ type Data = AxiosResponse<EntregaDetailResponse>;
 type Error = {
   response: AxiosResponse<EntregaDetailResponse>;
 };
-
-
-const renderNota = (nota: number) => {
-  if (nota < 4) {
-    return "Insuficiente";
-  } else{
-    return "Suficiente";
-  }
-}
 
 export const Correccion = () => {
     const { id } = useParams();
