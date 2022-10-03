@@ -29,14 +29,18 @@ export type Entrega =
   PartialEntrega &
   {
     resultado: string;
+    nota : number | null;
+    correccion: string | null;
+    corrector : string | null;
   };
 
 export type PartialEntrega = {
   id: number;
-  get_estado_display: EntregaStatus;
+  estado: EntregaStatus;
   tp: EntregaInstance;
   horario: string;
   archivo: string;
+  corregido : boolean;
 };
 
 // Response
