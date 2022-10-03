@@ -45,7 +45,7 @@ export const SendRecoveryEmail = () => {
   const makeRequest = async () => {
     setLoading(true);
     try {
-      await sendPasswordReset(email);
+      await sendPasswordReset(email.toLowerCase());
       setSuccess(true);
     } catch (error) {
       setSuccess(false);
@@ -127,7 +127,7 @@ export const SendRecoveryEmail = () => {
       <RecoveryModal
         show={showModal}
         handleClose={handleCloseModal}
-        email={email}
+        email={email.toLowerCase()}
         success={success}
       />
     </Container>
