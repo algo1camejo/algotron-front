@@ -13,11 +13,12 @@ import { PartialEntrega } from 'src/types/tps';
 import { getEntregas } from 'src/services/tps';
 import { formatDateWithHour } from 'src/utils/dates';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
+import { Col, Form, Row } from 'react-bootstrap';
 
 export const EntregasTable: FC = () => {
-  console.log('EntregasTable');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [onlyCorregidos, setOnlyCorregidos] = useState<boolean>(false);
 
   const {
     data,
@@ -28,7 +29,7 @@ export const EntregasTable: FC = () => {
     isRefetchError,
   } = useQuery(
     tpsKeys.entregas.list(currentPage),
-    () => getEntregas(currentPage),
+    () => getEntregas(currentPage, 10, onlyCorregidos),
     {
       refetchOnWindowFocus: false,
     },
@@ -40,7 +41,8 @@ export const EntregasTable: FC = () => {
     if(data?.data?.total_pages) {
       setTotalPages(data?.data?.total_pages);
     }
-  }, [data?.data?.total_pages]);
+    refetch();
+  }, [data?.data?.total_pages, onlyCorregidos]);
 
   const handleFirst = () => {
     setCurrentPage(1);
@@ -65,6 +67,11 @@ export const EntregasTable: FC = () => {
   const handleRetry = () => {
     refetch();
   };
+
+  const handleFilter =(checked : boolean) => {
+    setOnlyCorregidos(checked);
+    setCurrentPage(1);
+  }
 
   const renderEntrega = (entrega: PartialEntrega) => {
     const {
@@ -101,6 +108,16 @@ export const EntregasTable: FC = () => {
   return (
     <>
       <div className="table-container">
+        <Row>
+          <Col style={{display:'flex', justifyContent:'right'}}>
+            <Form.Check
+              type="switch"
+              label="Mostrar solo entregas corregidas"
+              onChange={(val)=> {handleFilter(val.target.checked)}}
+              >
+            </Form.Check>
+          </Col>
+        </Row>
         <Table striped className="text-center">
           <thead>
             <tr>

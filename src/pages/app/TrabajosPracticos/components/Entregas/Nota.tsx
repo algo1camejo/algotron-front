@@ -38,8 +38,9 @@ export const Nota = ( {nota, corrector} : NotaProps) => {
 
     return (
         <Alert
-          className="status-alert"
+          className="nota-alert"
           variant={color}
+
         >
           <Image src={image}/>
           <div className="vr"></div>
