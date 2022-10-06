@@ -37,12 +37,12 @@ export const EntregasTable: FC = () => {
 
   const entregas = data?.data?.results || [];
 
-  useEffect((reload=handleRetry) => {
+  useEffect(() => {
     if(data?.data?.total_pages) {
       setTotalPages(data?.data?.total_pages);
     }
-    reload();
-  }, [data?.data?.total_pages, onlyCorregidos]);
+    refetch();
+  }, [data?.data?.total_pages, onlyCorregidos, refetch]);
 
   const handleFirst = () => {
     setCurrentPage(1);
