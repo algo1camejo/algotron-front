@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { Card } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from "rehype-raw";
 import { useParams } from 'react-router-dom';
 import { getEntregaDetail } from 'src/services/tps';
 import { EntregaDetailResponse } from 'src/types/tps';
@@ -91,9 +92,7 @@ export const Correccion = () => {
         </Card.Title>
       </div>
       <div>
-        <ReactMarkdown>
-          {correccion??"No hay corrección"}
-        </ReactMarkdown>
+        <ReactMarkdown  children={correccion??"No se pudo cargar :("} rehypePlugins={[rehypeRaw]}/>
       </div>
     </Card.Body>
     <Card.Footer>
