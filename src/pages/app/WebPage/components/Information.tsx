@@ -21,7 +21,7 @@ export default function Information() {
                 <Card style={{"height" : "100%"}}>
                     <Card.Body>
                         <Card.Title>
-                            Regimen de cursada
+                            Régimen de cursada
                         </Card.Title>
                         <LoadingButton
                             onClick={downloadRegimen}

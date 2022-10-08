@@ -21,6 +21,7 @@
     "mem": "^9.0.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
+    "react-calendar": "^3.9.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
@@ -53,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-calendar": "^3.5.3"
   }
 }
