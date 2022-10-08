@@ -5,6 +5,7 @@ import Home from 'src/pages/app/Home';
 import {
   TrabajosPracticos,
   Entrega,
+  Correccion,
 } from 'src/pages/app/TrabajosPracticos';
 import Login from 'src/pages/auth/Login';
 import Examenes from 'src/pages/app/Examenes';
@@ -39,6 +40,7 @@ function App() {
       >
         <Route path="/" element={<Home/>}/>
         <Route path="home" element={<Home/>}/>
+        <Route path="trabajos-practicos/correccion/:id" element={<Correccion/>}/>
         <Route path="trabajos-practicos/:id" element={<Entrega/>}/>
         <Route path="trabajos-practicos" element={<TrabajosPracticos/>}/>
         <Route path="examenes" element={<Examenes/>}/>
