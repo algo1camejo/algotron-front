@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { Card } from 'react-bootstrap';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from "rehype-raw";
 import { useParams } from 'react-router-dom';
 import { getEntregaDetail } from 'src/services/tps';
 import { EntregaDetailResponse } from 'src/types/tps';
 import { tpsKeys } from 'src/pages/app/TrabajosPracticos/queries';
+
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Viewer } from '@toast-ui/react-editor';
+
 import './styles.scss';
 import {
   ErrorWithRetry,
@@ -24,7 +26,7 @@ type Error = {
 };
 
 export const Correccion = () => {
-    const { id } = useParams();
+  const { id } = useParams();
 
   const {
     data,
@@ -84,17 +86,17 @@ export const Correccion = () => {
   }
 
   return (
-    <Card className="entrega-container">
+    <Card className="entrega-container" style={{overflowX:"scroll", wordWrap:"break-word"}}>
     <Card.Body>
       <div className="tp-header">
         <Card.Title>
           {"Devolución " + titulo}
         </Card.Title>
       </div>
-      <div>
-        <ReactMarkdown  children={correccion??"No se pudo cargar :("} rehypePlugins={[rehypeRaw]}/>
-      </div>
-    </Card.Body>
+      <Viewer
+        initialValue={correccion}
+      />
+      </Card.Body>
     <Card.Footer>
       <Nota
         nota={nota}
