@@ -3,7 +3,6 @@ import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Loading } from 'src/components/messages';
 import { getExamen } from 'src/services/examenes';
-import { Respuesta } from 'src/types/examenes';
 import { Nota } from '../TrabajosPracticos/components/Entregas/Nota';
 import { Respuestas } from './componenents/Respuestas';
 

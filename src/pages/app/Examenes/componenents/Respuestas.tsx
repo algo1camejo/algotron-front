@@ -1,5 +1,3 @@
-import { Viewer } from '@toast-ui/react-editor'
-import React from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import { Respuesta } from 'src/types/examenes'
