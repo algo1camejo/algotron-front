@@ -23,13 +23,13 @@ export const DetalleExamen = () => {
   if (isError || !id) {
     return (
       <Card className="examenes-container">
-      <Card.Header>
-        No se puedo encontrar este examen
-      </Card.Header>
-      <Card.Body>
-        <Image src="/static/error/tron-buscando-comida.svg"/>
-      </Card.Body>
-    </Card>
+        <Card.Header>
+          No se puedo encontrar este examen
+        </Card.Header>
+        <Card.Body>
+          <Image src="/static/error/tron-buscando-comida.svg"/>
+        </Card.Body>
+      </Card>
     )
   }
 
@@ -41,6 +41,19 @@ export const DetalleExamen = () => {
         </Card.Header>
         <Card.Body>
           <Loading/>
+        </Card.Body>
+      </Card>
+    )
+  }
+
+  if (!data.corregido){
+    return(
+      <Card className="examenes-container">
+        <Card.Header>
+          Este examen existe, pero aún no fue corregido.
+        </Card.Header>
+        <Card.Body>
+          <Image src="/static/error/under-construction.png"/>
         </Card.Body>
       </Card>
     )
@@ -60,8 +73,8 @@ export const DetalleExamen = () => {
       <Row>
           <h1>{data.examen.nombre}</h1>
       </Row>
-      <Row>
-        <Col xs="auto">
+      <Row className='justify-content-center'>
+        <Col sm="10" xs="12">
           <Respuestas
             respuestas={data.respuestas}
           />

@@ -28,6 +28,7 @@ export interface Result {
     nota: number;
     corrector: string | null;
     respuestas: Respuesta[];
+    corregido: boolean;
 }
 
 export interface ExamenesResponse {

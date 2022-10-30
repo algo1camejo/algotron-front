@@ -27,14 +27,24 @@ export const Examenes: FC = () => {
 
 
   const renderExamen = (examen : Result ) => {
-    return (
-      <tr key = {examen.id}>
-        <td>{examen.examen.nombre}</td>
-        <td>{examen.corrector??"No declarado"}</td>
-        <td>{renderNota(examen.nota)}</td>
-        <td><DetailButton id={examen.id}/></td>
-      </tr>
-    )
+    if (examen.corregido) {
+      return (
+        <tr key = {examen.id}>
+          <td>{examen.examen.nombre}</td>
+          <td>{examen.corrector??"No declarado"}</td>
+          <td>{renderNota(examen.nota)}</td>
+          <td><DetailButton id={examen.id}/></td>
+        </tr>
+      )
+    }else{
+      return (
+        <tr key = {examen.id}>
+          <td>{examen.examen.nombre}</td>
+          <td>Aún no definido</td>
+          <td>En corrección</td>
+        </tr>
+      )
+    }
   }
 
   if (isError) {
