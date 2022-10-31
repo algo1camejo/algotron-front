@@ -15,6 +15,7 @@ import { AuthGuard, GuestGuard } from 'src/components/guards';
 import { SendRecoveryEmail } from 'src/pages/recovery/SendRecoveryEmail';
 import { PasswordReset } from './pages/recovery/PasswordReset';
 import WebPage from './pages/app/WebPage';
+import { DetalleExamen } from './pages/app/Examenes/DetalleExamen';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="trabajos-practicos/:id" element={<Entrega/>}/>
         <Route path="trabajos-practicos" element={<TrabajosPracticos/>}/>
         <Route path="examenes" element={<Examenes/>}/>
+        <Route path="examenes/:id" element={<DetalleExamen/>}/>
         <Route path="password-change" element={<PasswordChange/>}/>
       </Route>
       <Route path="*" element={<NotFound/>}/>
