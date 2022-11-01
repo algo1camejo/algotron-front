@@ -1,10 +1,11 @@
 import api from "src/config/api";
+import { MaterialResponse } from "src/types/Material";
 
 export const getMaterial = async () => {
-    const response = await api.get(`/api/v1/material/`);
+    const response = await api.get<MaterialResponse>(`material/api/v1/material/`);
 
     if (response.status === 200 && response.data) {
-        console.log(response);
+        return response.data;
     }else{
         throw new Error('Error al obtener el material');
     }
