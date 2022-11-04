@@ -1,94 +1,98 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
-import { Loading, NoData } from 'src/components/messages';
+import {
+  Loading,
+  NoData,
+  ErrorWithRetry,
+} from 'src/components/messages';
 import { getExamenes } from 'src/services/examenes';
-import { Result } from 'src/types/examenes';
-import { DetailButton } from './componenents/DetailButton';
+import { Entrega } from 'src/types/examenes';
+import { ExamenActions } from './components/ExamenActions';
+import { ExamenNotaPill } from './components/ExamenNotaPill';
+import { examenesKeys } from './queries';
 import './styles.scss';
 
 export const Examenes: FC = () => {
   const {
     data,
+    refetch,
+    isSuccess,
     isError,
+    isLoading,
+    isRefetchError,
   } = useQuery(
-    ["examenes"],getExamenes,
+    examenesKeys.list(),
+    getExamenes,
     {
       refetchOnWindowFocus: false,
+      select: (data) => data?.data,
     },
   );
 
-  const renderNota = (nota: number) => {
-    if (nota < 4) {
-      return "Insuficiente";
-    }
-    return nota;
-  };
-
-
-  const renderExamen = (examen : Result ) => {
-    if (examen.corregido) {
-      return (
-        <tr key = {examen.id}>
-          <td>{examen.examen.nombre}</td>
-          <td>{examen.corrector??"No declarado"}</td>
-          <td>{renderNota(examen.nota)}</td>
-          <td><DetailButton id={examen.id}/></td>
-        </tr>
-      )
-    }else{
-      return (
-        <tr key = {examen.id}>
-          <td>{examen.examen.nombre}</td>
-          <td>Aún no definido</td>
-          <td>En corrección</td>
-        </tr>
-      )
-    }
-  }
-
-  if (isError) {
+  const renderExamen = (examen : Entrega ) => {
     return (
-      <Card className="examenes-container">
-        <Card.Header>
-          Ocurrio un error al cargar los examenes...
-        </Card.Header>
-        <Card.Body>
-          <Loading label="Por favor contactate con un docente..."/>
-        </Card.Body>
-      </Card>
-    )
+      <tr key={examen.id}>
+        <td>{examen.examen.nombre}</td>
+        <td>{examen.corrector ?? "Sin definir"}</td>
+        <td>
+          <ExamenNotaPill
+            nota={examen.nota}
+            corregido={examen.corregido}
+          />
+        </td>
+        <td>
+          <ExamenActions
+            id={examen.id}
+            corregido={examen.corregido}
+          />
+        </td>
+      </tr>
+    );
   }
+
+  const handleRetry = () => {
+    refetch();
+  };
 
   return (
     <Card className="examenes-container">
       <Card.Header>
-        Mis examenes
+        Mis exámenes
       </Card.Header>
       <Card.Body>
-          {(data && data.count > 0) && (
-            <Table striped>
-              <thead>
-                <tr>
-                  <th>
-                    Instancia
-                  </th>
-                  <th>
-                    Corrector
-                  </th>
-                  <th>
-                    Nota
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                { data.results.map(renderExamen) }
-              </tbody>
-            </Table>
+        <Table striped>
+          <thead>
+            <tr>
+              <th>
+                Instancia
+              </th>
+              <th>
+                Corrector
+              </th>
+              <th>
+                Nota
+              </th>
+              <th className="visually-hidden">
+                Acciones
+              </th>
+            </tr>
+          </thead>
+          {(isSuccess || isRefetchError) && data?.count > 0 && (
+            <tbody>
+              {data.results.map(renderExamen)}
+            </tbody>
           )}
-          {(data && data.count === 0) && (
-              <NoData label="No hay examenes"/>
-            )}
+        </Table>
+        {(isSuccess || isRefetchError) && data?.count === 0 && (
+          <NoData label="No hay exámenes"/>
+        )}
+        {isLoading && (
+          <Loading/>
+        )}
+        {isError && !isRefetchError && (
+          <ErrorWithRetry onRetry={handleRetry}/>
+        )}
       </Card.Body>
     </Card>
   );

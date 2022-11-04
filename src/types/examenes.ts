@@ -1,7 +1,4 @@
-export interface Links {
-    next: string | null;
-    prev: string | null;
-}
+import { Pagination } from 'src/types/pagination';
 
 export interface Examen {
     id: number;
@@ -21,21 +18,15 @@ export interface Respuesta {
     correccion: string;
 }
 
-export interface Result {
+export interface Entrega {
     id: number;
     examen: Examen;
     tema: string;
-    nota: number;
+    nota: number | null;
     corrector: string | null;
     respuestas: Respuesta[];
     corregido: boolean;
 }
 
-export interface ExamenesResponse {
-    page: number;
-    total_pages: number;
-    limit: number;
-    count: number;
-    links: Links;
-    results: Result[];
-}
+// Response
+export type ExamenesResponse = Pagination<Entrega>;

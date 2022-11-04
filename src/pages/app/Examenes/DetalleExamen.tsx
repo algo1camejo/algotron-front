@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Loading } from 'src/components/messages';
 import { getExamen } from 'src/services/examenes';
 import { Nota } from '../TrabajosPracticos/components/Entregas/Nota';
-import { Respuestas } from './componenents/Respuestas';
+import { Respuestas } from './components/Respuestas';
+import { examenesKeys } from './queries';
 
 export const DetalleExamen = () => {
   const { id } = useParams();
@@ -14,9 +15,12 @@ export const DetalleExamen = () => {
     isError,
     isLoading
   } = useQuery(
-    ["examenes",id], ()=>getExamen(id),
+    examenesKeys.detail(id),
+    () => getExamen(id),
     {
       refetchOnWindowFocus: false,
+      select: (data) => data?.data,
+      enabled: !!id,
     },
   );
 
@@ -24,7 +28,7 @@ export const DetalleExamen = () => {
     return (
       <Card className="examenes-container">
         <Card.Header>
-          No se puedo encontrar este examen
+          No se pudo encontrar este exámen
         </Card.Header>
         <Card.Body>
           <Image src="/static/error/tron-buscando-comida.svg"/>
