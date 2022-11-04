@@ -7,15 +7,15 @@ import ReactMarkdown from 'react-markdown';
 import { Respuesta } from 'src/types/examenes';
 
 export type RespuestasProps = {
-  respuestas: Respuesta[];
+  respuestas: Respuesta[] | null;
 };
 
 export const Respuestas: FC<RespuestasProps> = (props) => {
-  let {
+  const {
     respuestas,
   } = props;
 
-  if(respuestas?.length === 0) {
+  if(!respuestas || (respuestas as Respuesta[]).length === 0) {
     return (
       <div className="preguntas-container">
         Sin respuestas
