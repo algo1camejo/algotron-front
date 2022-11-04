@@ -5,12 +5,17 @@ import './styles.scss';
 
 export const MaterialScreen = () => {
   return (
-        <Card className='material-card'>
-        <Card.Body>
-            <Container fluid>
-                <MaterialCards/>
-            </Container>
-        </Card.Body>
+    <Card className='material-card'>
+      <Card.Header>
+        Material
+      </Card.Header>
+      <Card.Body>
+        <Container fluid>
+          <MaterialCards/>
+        </Container>
+      </Card.Body>
     </Card>
-  )
-}
+  );
+};
+
+export default MaterialScreen;
