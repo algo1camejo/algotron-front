@@ -1,23 +1,26 @@
 import { FC } from 'react';
 import { Alert } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image';
-import { getPropsByNota, formatNota } from 'src/utils/notas';
+import { getPropsByNota } from 'src/utils/notas';
 
 export type NotaProps = {
   nota: number | null,
-  corrector : string,
+  corrector : string | null,
+  corregido?: boolean,
 };
 
 export const Nota: FC<NotaProps> = (props) => {
   const {
     nota,
     corrector,
+    corregido = true,
   } = props;
 
   const {
+    title,
     color,
     image,
-  } = getPropsByNota(nota);
+  } = getPropsByNota(nota, corregido);
 
   return (
     <Alert
@@ -28,10 +31,10 @@ export const Nota: FC<NotaProps> = (props) => {
       <div className="vr"></div>
       <div>
         <Alert.Heading>
-          {"Nota : " + formatNota(nota)}
+          {"Nota: " + title}
         </Alert.Heading>
         <p>
-          {"Corrector/a : " +corrector}
+          {"Corregido por: " + (corrector ?? "sin definir")}
         </p>
       </div>
     </Alert>

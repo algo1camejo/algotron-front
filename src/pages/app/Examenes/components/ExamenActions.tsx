@@ -6,13 +6,11 @@ import { IconButton } from 'src/components/buttons';
 
 export type ExamenActionsProps = {
   id: number;
-  corregido?: boolean;
 };
 
 export const ExamenActions: FC<ExamenActionsProps> = (props) => {
   const {
     id,
-    corregido = false,
   } = props;
 
   const navigate = useNavigate();
@@ -27,13 +25,11 @@ export const ExamenActions: FC<ExamenActionsProps> = (props) => {
       gap={2}
       className="justify-content-end"
     >
-      {corregido && (
-        <IconButton
-          label="Ver Corrección"
-          icon={faEye}
-          onClick={handleSeeFeedBack}
-        />
-      )}
+      <IconButton
+        label="Ver entrega"
+        icon={faEye}
+        onClick={handleSeeFeedBack}
+      />
     </Stack>
   )
 }

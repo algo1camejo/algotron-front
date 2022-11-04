@@ -30,7 +30,7 @@ export const Examenes: FC = () => {
     },
   );
 
-  const renderExamen = (examen : Entrega ) => {
+  const renderExamen = (examen : Entrega) => {
     return (
       <tr key={examen.id}>
         <td>{examen.examen.nombre}</td>
@@ -44,7 +44,6 @@ export const Examenes: FC = () => {
         <td>
           <ExamenActions
             id={examen.id}
-            corregido={examen.corregido}
           />
         </td>
       </tr>

@@ -1,89 +1,98 @@
 import { useQuery } from '@tanstack/react-query';
-import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { Loading } from 'src/components/messages';
-import { getExamen } from 'src/services/examenes';
+import {
+  Card,
+  Container,
+} from 'react-bootstrap';
+import {
+  ErrorWithRetry,
+  NoData,
+  Loading,
+} from 'src/components/messages';
 import { Nota } from '../TrabajosPracticos/components/Entregas/Nota';
 import { Respuestas } from './components/Respuestas';
+import { AxiosResponse } from 'axios';
+import { Entrega } from 'src/types/examenes';
+import { getExamen } from 'src/services/examenes';
 import { examenesKeys } from './queries';
+
+type Error = {
+  response: AxiosResponse<Entrega>;
+};
+
+type Data = AxiosResponse<Entrega>;
 
 export const DetalleExamen = () => {
   const { id } = useParams();
 
   const {
     data,
+    error,
+    refetch,
+    isLoading,
+    isRefetchError,
     isError,
-    isLoading
-  } = useQuery(
-    examenesKeys.detail(id),
-    () => getExamen(id),
+  } = useQuery<Data, Error, any>(
+    examenesKeys.detail(Number(id)),
+    () => getExamen(Number(id)),
     {
       refetchOnWindowFocus: false,
       select: (data) => data?.data,
-      enabled: !!id,
+      enabled: !!Number(id),
     },
   );
 
-  if (isError || !id) {
-    return (
-      <Card className="examenes-container">
-        <Card.Header>
-          No se pudo encontrar este exámen
-        </Card.Header>
-        <Card.Body>
-          <Image src="/static/error/tron-buscando-comida.svg"/>
-        </Card.Body>
-      </Card>
-    )
-  }
+  const isNotFound = error?.response?.status === 404;
+  const isEnabled = !!Number(id);
 
-  if (isLoading || !data) {
+  const handleRetry = () => {
+    refetch();
+  };
+
+  if (!data) {
     return (
-      <Card className="examenes-container">
-        <Card.Header>
-          Tu entrega...
-        </Card.Header>
-        <Card.Body>
+      <>
+        {isLoading && isEnabled && (
           <Loading/>
-        </Card.Body>
-      </Card>
-    )
-  }
-
-  if (!data.corregido){
-    return(
-      <Card className="examenes-container">
-        <Card.Header>
-          Este examen existe, pero aún no fue corregido.
-        </Card.Header>
-        <Card.Body>
-          <Image src="/static/error/under-construction.png"/>
-        </Card.Body>
-      </Card>
-    )
+        )}
+        {!isEnabled && (
+          <NoData label="No se encontró el exámen"/>
+        )}
+        {isError && !isRefetchError && isNotFound && (
+          <NoData label="No se encontró el exámen"/>
+        )}
+        {isError && !isRefetchError && !isNotFound && (
+          <ErrorWithRetry onRetry={handleRetry}/>
+        )}
+      </>
+    );
   }
 
   return (
-    <Container 
+    <Container
       className="examenes-container"
       fluid
     >
-      <Row>
+      <Card>
         <Nota
           nota={data.nota}
-          corrector={data.corrector??"No aclarado"}
+          corrector={data.corrector}
+          corregido={data.corregido}
         />
-      </Row>
-      <Row>
-          <h1>{data.examen.nombre}</h1>
-      </Row>
-      <Row className='justify-content-center'>
-        <Col sm="10" xs="12">
+        <Card.Body>
+          <div className="examen-header">
+            <Card.Title>
+              {data.examen.nombre}
+            </Card.Title>
+            <Card.Subtitle>
+              {data.tema}
+            </Card.Subtitle>
+          </div>
           <Respuestas
             respuestas={data.respuestas}
           />
-        </Col>
-      </Row>
+        </Card.Body>
+      </Card>
     </Container>
   )
 }
