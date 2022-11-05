@@ -8,7 +8,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 export type EntregaActionsProps = {
   id: number;
   archivo: string;
-  corregido:boolean;
+  corregido: boolean;
 };
 
 export const EntregaActions: FC<EntregaActionsProps> = (props) => {
@@ -34,15 +34,13 @@ export const EntregaActions: FC<EntregaActionsProps> = (props) => {
       gap={2}
       className="justify-content-end"
     >
-      {
-        corregido &&
+      {corregido && (
         <IconButton
           label='Ver Corrección'
           icon={faPenNib}
           onClick={handleSeeFeedBack}
         />
-      }
-      
+      )}
       <IconButton
         label="Ver entrega"
         icon={faEye}

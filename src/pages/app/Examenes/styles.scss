@@ -3,6 +3,8 @@
     justify-content: space-between;
   };
   .nota-alert{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     margin: 0;
     display: flex;
     flex-direction: row;
@@ -23,16 +25,22 @@
   }
 };
 
-#preguntas-list{
+.preguntas-container{
   width: 100%;
-  .row{
+  margin-top: 1rem;
+  text-align: center;
+  .row {
     margin-top: 2rem;
     margin-bottom: 2rem;
-  }
-  .card-interna{
+  };
+  .card-interna {
     border-color: black;
     border-width: 1px;
-    width: 100%;
     margin: 2rem;
-  }
+  };
+  .header {
+    .subtitle {
+      font-weight: normal;
+    };
+  };
 }
