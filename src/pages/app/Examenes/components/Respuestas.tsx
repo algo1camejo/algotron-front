@@ -69,7 +69,7 @@ export const Respuestas: FC<RespuestasProps> = (props) => {
                     <h4>Corrección</h4>
                   </Card.Title>
                   <ReactMarkdown
-                    children={respuesta.correccion}
+                    children={respuesta.correccion ?? "Sin corrección"}
                   />
                 </Card.Body>
               </Card>

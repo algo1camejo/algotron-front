@@ -15,7 +15,7 @@ export interface Respuesta {
     pregunta: Pregunta;
     respuesta: string;
     nota: string | null;
-    correccion: string;
+    correccion: string | null;
 }
 
 export interface Entrega {
