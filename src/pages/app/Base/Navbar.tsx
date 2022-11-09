@@ -22,11 +22,18 @@ export const Navbar: FC = () => {
     end: false,
   });
 
+  const isMaterial= !!useMatch({
+    path: 'material',
+    end: false,
+  });
+
+
   useEffect(() => {
     setExpanded(false);
   }, [
     isTrabajosPracticos,
     isExamenes,
+    isMaterial
   ]);
 
   const toggle = () => {
@@ -69,6 +76,16 @@ export const Navbar: FC = () => {
                 eventKey="examenes"
               >
                 Exámenes
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                as={RouterLink}
+                to="/material"
+                active={isMaterial}
+                eventKey="material"
+              >
+                Material
               </Nav.Link>
             </Nav.Item>
           </Nav>
