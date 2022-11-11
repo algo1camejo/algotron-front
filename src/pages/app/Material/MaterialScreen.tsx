@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, Col, Container,Image, Row } from 'react-bootstrap';
-import { MaterialCards } from './components/MaterialCards';
 import './styles.scss';
 
 export const MaterialScreen = () => {
