@@ -1,22 +1,17 @@
 import React from 'react'
-import { Card, Col, Container,Image, Row } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
+import { MaterialCards } from './components/MaterialCards';
 import './styles.scss';
 
 export const MaterialScreen = () => {
   return (
     <Card className='material-card'>
       <Card.Header>
-        Messi
+        Materiales
       </Card.Header>
       <Card.Body>
         <Container fluid>
-          <Row>
-            <Col xs="auto">
-              <Image
-                src="https://media.tenor.com/xIDMdm9WNVYAAAAS/messiking22.gif"
-              />
-            </Col>
-          </Row>
+          <MaterialCards/>
         </Container>
       </Card.Body>
     </Card>
