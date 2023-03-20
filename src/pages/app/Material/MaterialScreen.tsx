@@ -16,7 +16,7 @@ export const MaterialScreen = () => {
       </Card.Body>
       <Card.Footer>
         <Card.Link href="https://docs.google.com/spreadsheets/d/1eB_RR0iSw3yL9R224GoeZjLhYn0JZ4KktfqveaxBZtw/edit?usp=sharing">
-          <Card.Title >{["Videos de las clases"]}</Card.Title>
+          Videos de las clases
         </Card.Link>
       </Card.Footer>
     </Card>
