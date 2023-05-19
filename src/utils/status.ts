@@ -3,7 +3,7 @@ import { STATUS } from 'src/types/status';
 export const PROPS_BY_STATUS = {
   [STATUS.ERROR]: {
     title: 'Falló',
-    subtitle: 'Entrega no aceptada',
+    subtitle: 'EL TP se entrego pero no pudo pasar todas las pruebas :(',
     color: 'danger',
     image: '/static/tron/llorando.svg',
   },
