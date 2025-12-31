@@ -11,6 +11,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      CXXFLAGS: "-std=c++20"
 
     steps:
     - uses: actions/checkout@v4
