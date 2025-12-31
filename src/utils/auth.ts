@@ -69,11 +69,8 @@ const setAuthInterceptors = (
   api.interceptors.request.use(
     async (config) => {
       const access = localStorage.getItem('access');
-      if (access) {
-        config.headers = {
-          ...config.headers,
-          authorization: `Bearer ${access}`,
-        };
+      if (access && config.headers) {
+        config.headers.authorization = `Bearer ${access}`;
       }
       return config;
     },
@@ -120,11 +117,8 @@ export const setToken = () =>{
   api.interceptors.request.use(
     async (config) => {
       const access = localStorage.getItem('access');
-      if (access) {
-        config.headers = {
-          ...config.headers,
-          authorization: `Bearer ${access}`,
-        };
+      if (access && config.headers) {
+        config.headers.authorization = `Bearer ${access}`;
       }
       return config;
     },
