@@ -1,0 +1,29 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      CXXFLAGS: "-std=c++20"
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "24.x"
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build application
+      run: npm run build

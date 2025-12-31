@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, Container } from 'react-bootstrap';
 import { MaterialCards } from './components/MaterialCards';
 import './styles.scss';

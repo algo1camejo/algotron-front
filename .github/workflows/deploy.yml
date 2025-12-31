@@ -9,26 +9,27 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      REACT_APP_BASE_URL: "https://admin.algotron.com.ar"
+      VITE_BASE_URL: "https://admin.algotron.com.ar"
+      CXXFLAGS: "-std=c++20"
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: "16.x"
+        node-version: "24.x"
 
     - name: Install dependencies
-      run: npm install --legacy-peer-deps
+      run: npm ci
 
     - name: Build page
       run: npm run build
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build
         allow_empty_commit: true
         cname: algotron.com.ar

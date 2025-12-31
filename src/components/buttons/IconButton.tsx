@@ -22,6 +22,7 @@ export const IconButton= <As extends React.ElementType = 'button'>(
   } = props;
 
   return (
+    // @ts-ignore - React Bootstrap type inference issue with generic As prop
     <Button
       {...buttonProps}
       className={`
